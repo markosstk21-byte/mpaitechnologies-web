@@ -193,6 +193,38 @@
     .legal-datos{grid-template-columns:1fr; gap:2px 0;}
     .legal-datos dd{margin-bottom:12px;}
   }
+
+  /* TEMA CLARO POR SECCION — reescribe los tokens; ningun componente necesita cambios */
+  section.claro{
+    --bg:#e8f0fa; --bg2:#dbe8f7;
+    --panel:#ffffff; --panel2:#f1f7fd;
+    --border:#bfd4ec;
+    --text:#0d2440; --muted:#3d5674;
+    --accent:#14539b; --accent-soft:#cfe2f7; --gold:#8a6410;
+    background:var(--bg); color:var(--text);
+  }
+  section.claro .card,
+  section.claro .obj{ box-shadow:0 1px 2px rgba(13,36,64,.06), 0 8px 24px rgba(13,36,64,.05); }
+  section.claro .step .dot{ color:#ffffff; }
+  section.claro .card .icon{ background:var(--accent-soft); }
+
+  /* CONTACTO: unica seccion con la caja en azul saturado */
+  section.claro#contacto .cta-box{
+    background:linear-gradient(135deg,#14539b,#0d3c74);
+    border:1px solid #0d3c74;
+    box-shadow:0 10px 30px rgba(13,60,116,.22);
+  }
+  section.claro#contacto .cta-box h3{ color:#ffffff; }
+  section.claro#contacto .cta-box p{ color:#dbe8f7; }
+  section.claro#contacto .cta-meta,
+  section.claro#contacto .cta-meta-alt{ color:#cfe2f7; }
+  section.claro#contacto .btn-primary{ background:#ffffff; color:#0d2440; }
+  section.claro#contacto .btn-secondary{ background:transparent; border:1px solid rgba(255,255,255,.5); color:#ffffff; }
+
+  /* globos del hero: blanco azulado sobre el fondo oscuro */
+  .pill{
+    background:#e8f0fa; border:1px solid #bfd4ec; color:#0d2440; font-weight:600;
+  }
 </style>
 </head>
 <body>
@@ -222,7 +254,7 @@
   </div>
 </div>
 
-<section id="que-hago">
+<section id="que-hago" class="claro">
   <div class="wrap">
     <p class="kicker">Qué hago</p>
     <h3 class="section-title">Cuatro formas de aplicar IA a un negocio, de menos a más complejo</h3>
@@ -293,7 +325,7 @@
   </div>
 </section>
 
-<section id="diferenciacion">
+<section id="diferenciacion" class="claro">
   <div class="wrap">
     <p class="kicker">Por qué esto, no otra cosa</p>
     <h3 class="section-title">El diferenciador no es la tecnología</h3>
@@ -344,7 +376,7 @@
   </div>
 </section>
 
-<section id="objeciones">
+<section id="objeciones" class="claro">
   <div class="wrap">
     <p class="kicker">Objeciones habituales</p>
     <h3 class="section-title">Lo que se pregunta antes de decidirse</h3>
@@ -356,7 +388,7 @@
   </div>
 </section>
 
-<section id="contacto">
+<section id="contacto" class="claro">
   <div class="wrap">
     <div class="cta-box">
       <h3>¿Tienes un proceso que se está comiendo horas de tu equipo?</h3>
