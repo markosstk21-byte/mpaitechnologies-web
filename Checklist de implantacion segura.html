@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist de implantación segura — MPAI Technologies</title>
+<link rel="stylesheet" href="_ds/broadsheet-7f654d42-b05f-4f7b-b0c7-27b53d57a5e2/styles.css">
+<style>
+  doc-page:not(:defined) { visibility: hidden; }
+  body { margin: 0; }
+  h1, h2, h3 { font-family: var(--font-heading); letter-spacing: -0.015em; text-wrap: balance; }
+  p, li, td, th { font-family: var(--font-body); text-wrap: pretty; }
+  a { color: var(--color-accent-700); }
+  .casilla {
+    display: inline-block; width: 13pt; height: 13pt; margin-right: 9pt;
+    border: 1pt solid var(--color-text); vertical-align: -1.5pt; flex: none;
+  }
+  .punto { display: flex; align-items: flex-start; break-inside: avoid; margin-top: 15pt; }
+  .punto h3 { margin: 0; font-size: 12.5pt; line-height: 17pt; font-weight: 600; }
+  .punto p { margin: 4pt 0 0; font-size: 11pt; line-height: 16pt; color: #3c3937; }
+  .bloque { break-inside: avoid; margin-top: 26pt; }
+  .bloque > span {
+    display: block; font-size: 9.5pt; letter-spacing: 0.08em; text-transform: uppercase; color: #5a5652;
+  }
+  .bloque > h2 { margin: 5pt 0 0; font-size: 15pt; line-height: 21pt; font-weight: 600; }
+</style>
+</head>
+<body>
+<doc-page margin="0.85in">
+
+  <div slot="footer" style="display: flex; justify-content: space-between; gap: 18pt; padding-top: 7pt; border-top: 0.5pt solid #c9c5c1; font-family: var(--font-body); font-size: 9pt; color: #5a5652;">
+    <span>MPAI Technologies · Marco Pavón Cobo · mpaitechnologies.es</span>
+    <span>Checklist de implantación segura</span>
+  </div>
+
+  <span style="display: block; font-family: var(--font-body); font-size: 9.5pt; letter-spacing: 0.08em; text-transform: uppercase; color: #5a5652;">MPAI Technologies · Documento de trabajo</span>
+  <h1 style="margin: 9pt 0 0; font-size: 26pt; line-height: 31pt; font-weight: 600;">Checklist de implantación segura</h1>
+  <p style="margin: 12pt 0 0; font-size: 12.5pt; line-height: 19pt; max-width: 46em;">Doce comprobaciones antes de poner una automatización o un agente de IA a funcionar sobre datos reales de un negocio. Si alguna queda sin marcar, el sistema no está listo para producción.</p>
+  <p style="margin: 10pt 0 0; font-size: 10.5pt; line-height: 16pt; color: #3c3937; max-width: 46em;">Este documento es una guía profesional de uso interno. No sustituye el asesoramiento jurídico: las obligaciones concretas en materia de protección de datos dependen de cada tratamiento.</p>
+
+  <div class="bloque">
+    <span>Bloque 1 de 4</span>
+    <h2>Antes de construir</h2>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>El proceso está escrito, con sus excepciones</h3>
+      <p>Quién hace hoy cada paso, con qué dato de entrada y qué ocurre en los casos raros. Un proceso que nadie ha puesto por escrito no se puede automatizar: se automatiza una suposición.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Está decidido qué NO se automatiza</h3>
+      <p>El límite explícito, por escrito y aceptado por quien decide. Sin él, cualquier resultado inesperado parecerá un incumplimiento.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Se ha comprobado que hace falta un modelo de IA</h3>
+      <p>Si las reglas se pueden escribir, una automatización sin IA es más barata, más rápida y no tiene margen de invención. El modelo se justifica cuando la entrada es texto libre, hay documentación que consultar o excepciones frecuentes.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Hay una medición de partida</h3>
+      <p>Horas por proceso, número de errores manuales o tiempo de respuesta, medidos antes de tocar nada. Sin línea base no se puede demostrar el retorno después.</p>
+    </div></div>
+  </div>
+
+  <div class="bloque">
+    <span>Bloque 2 de 4</span>
+    <h2>Datos y cumplimiento</h2>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Contrato de encargado del tratamiento firmado</h3>
+      <p>Conforme al artículo 28 del Reglamento General de Protección de Datos, firmado antes de que el sistema acceda a un solo dato personal, y con la lista de subencargados (proveedores de modelo, alojamiento, mensajería) identificada.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>El sistema accede solo a los campos que necesita</h3>
+      <p>Minimización efectiva: nunca la base de datos completa. El acceso se concede por tarea, no por comodidad de desarrollo.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Plazo de conservación definido y justificado</h3>
+      <p>Cuánto tiempo se guardan las conversaciones, los registros y los datos intermedios, y qué los borra automáticamente cuando venza el plazo.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Las personas afectadas están informadas</h3>
+      <p>Si un sistema automático atiende, escribe o decide, quien está al otro lado debe saberlo, y debe existir una vía practicable para hablar con una persona.</p>
+    </div></div>
+  </div>
+
+  <div class="bloque">
+    <span>Bloque 3 de 4</span>
+    <h2>Construcción</h2>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Control de errores en cada rama</h3>
+      <p>Ningún paso queda sin salida de fallo. Un flujo que se detiene en silencio es peor que un flujo que avisa.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Validación de salida y límite de iteraciones</h3>
+      <p>La respuesta del modelo se comprueba contra el formato esperado antes de usarse, y el agente tiene un número máximo de vueltas para evitar que se quede dando ciclos y consumiendo coste.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Escalado a una persona, definido de antemano</h3>
+      <p>Qué condiciones obligan a parar y avisar a alguien: baja confianza, importe por encima de un umbral, cliente enfadado, dato que no cuadra. Las decisiones con consecuencias para una persona no se cierran solas.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Registro de decisiones y coste por ejecución</h3>
+      <p>Cada ejecución deja traza de qué se decidió y con qué dato, y hay una estimación del coste unitario antes de abrir el volumen real.</p>
+    </div></div>
+  </div>
+
+  <div class="bloque">
+    <span>Bloque 4 de 4</span>
+    <h2>Antes de dar el sistema por bueno</h2>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Batería de casos de prueba superada, incluidos los raros</h3>
+      <p>Casos normales, casos límite y casos de mala fe. Un sistema que solo se ha probado con el ejemplo bonito fallará el primer día.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>El sistema vive en la cuenta del cliente, documentado</h3>
+      <p>Credenciales, flujos y código en poder del negocio, con documentación suficiente para que otro profesional pueda continuar. La dependencia de un proveedor no es una característica.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Hay un plan de vuelta atrás</h3>
+      <p>Cómo se desconecta y cómo se retoma el proceso a mano si algo se rompe, probado al menos una vez.</p>
+    </div></div>
+    <div class="punto"><span class="casilla" aria-hidden="true"></span><div>
+      <h3>Alguien del equipo sabe usarlo y vigilarlo</h3>
+      <p>Una persona formada, con acceso al registro y con criterio para distinguir un aviso rutinario de un problema real.</p>
+    </div></div>
+  </div>
+
+  <div style="break-inside: avoid; margin-top: 30pt; padding-top: 12pt; border-top: 1pt solid var(--color-text);">
+    <h2 style="margin: 0; font-size: 14pt; line-height: 20pt; font-weight: 600;">¿Alguna casilla sin marcar?</h2>
+    <p style="margin: 8pt 0 0; font-size: 11pt; line-height: 17pt; max-width: 44em;">El diagnóstico inicial del proceso es gratuito y sin compromiso. WhatsApp 931 525 368 · info@mpaitechnologies.es · mpaitechnologies.es</p>
+  </div>
+
+</doc-page>
+<script src="./doc-page.js"></script>
+</body>
+</html>
