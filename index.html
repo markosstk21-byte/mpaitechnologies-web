@@ -88,19 +88,47 @@
   </section>
 
   <!-- DOLORES -->
-  <section class="seccion bloque-gris">
+  <section class="seccion bloque-gris" id="dolores">
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="etiqueta">¿Te suena?</p>
-        <h2>Estas son las tareas que más piden que les quite de encima</h2>
+        <h2>Las tareas que más me piden <em>quitar de encima</em></h2>
       </div>
-      <div class="dolores-lista">
-        <div class="dolor"><span class="num">01</span><div><h3>Correos que nadie clasifica</h3><p>Llegan mezclados con todo lo demás y alguien tiene que leerlos uno a uno para saber qué es urgente.</p></div></div>
-        <div class="dolor"><span class="num">02</span><div><h3>Citas gestionadas por WhatsApp</h3><p>Cada cambio de hora es un mensaje más, y siempre hay uno que se pierde en la conversación.</p></div></div>
-        <div class="dolor"><span class="num">03</span><div><h3>Facturas tecleadas a mano</h3><p>Copiar importes y conceptos de un PDF a tu programa, factura a factura, cada semana.</p></div></div>
-        <div class="dolor"><span class="num">04</span><div><h3>Llamadas fuera de horario</h3><p>El cliente pregunta a las 23:40 y hasta el lunes no hay quien conteste.</p></div></div>
-        <div class="dolor"><span class="num">05</span><div><h3>Contenido para redes que nunca sale</h3><p>Sabes que hay que publicar, pero entre el día a día nunca llega el momento.</p></div></div>
-        <div class="dolor"><span class="num">06</span><div><h3>Un proceso que solo entiende una persona</h3><p>Si esa persona falta un día, el proceso se para con ella.</p></div></div>
+      <div class="dolores-grid">
+        <article class="dolor-tarjeta aparece" style="--i:0">
+          <span class="dolor-num" aria-hidden="true">01</span>
+          <h3>Correos que nadie clasifica</h3>
+          <p>Llegan mezclados con todo lo demás y alguien tiene que leerlos uno a uno para saber qué es urgente.</p>
+        </article>
+        <article class="dolor-tarjeta aparece" style="--i:1">
+          <span class="dolor-num" aria-hidden="true">02</span>
+          <h3>Citas gestionadas por WhatsApp</h3>
+          <p>Cada cambio de hora es un mensaje más, y siempre hay uno que se pierde en la conversación.</p>
+        </article>
+        <article class="dolor-tarjeta aparece" style="--i:2">
+          <span class="dolor-num" aria-hidden="true">03</span>
+          <h3>Facturas tecleadas a mano</h3>
+          <p>Copiar importes y conceptos de un PDF a tu programa, factura a factura, cada semana.</p>
+        </article>
+        <article class="dolor-tarjeta aparece" style="--i:3">
+          <span class="dolor-num" aria-hidden="true">04</span>
+          <h3>Llamadas fuera de horario</h3>
+          <p>El cliente pregunta a las 23:40 y hasta el lunes no hay quien conteste.</p>
+        </article>
+        <article class="dolor-tarjeta aparece" style="--i:4">
+          <span class="dolor-num" aria-hidden="true">05</span>
+          <h3>Contenido para redes que nunca sale</h3>
+          <p>Sabes que hay que publicar, pero entre el día a día nunca llega el momento.</p>
+        </article>
+        <article class="dolor-tarjeta aparece" style="--i:5">
+          <span class="dolor-num" aria-hidden="true">06</span>
+          <h3>Un proceso que solo entiende una persona</h3>
+          <p>Si esa persona falta un día, el proceso se para con ella.</p>
+        </article>
+      </div>
+      <div class="dolores-remate aparece">
+        <p><strong>¿Te has visto en dos o más?</strong> Son horas de tu equipo que se pueden recuperar cada semana.</p>
+        <a class="btn btn-primario" href="#calculadora">Calcula cuántas</a>
       </div>
     </div>
   </section>
@@ -143,44 +171,129 @@
   </section>
 
   <!-- CIRCUITO -->
-  <section class="seccion bloque-verde">
+  <section class="seccion bloque-verde" id="circuito">
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="etiqueta">Automatización en marcha</p>
-        <h2>Este circuito no es un dibujo: es el que protege mis propias redes</h2>
-        <p>Cada día, mis publicaciones de Instagram salen solas. Si el disparador principal se retrasa, este flujo se activa, lo rescata y solo entonces avisa por correo. Pulsa un nodo o dale a reproducir.</p>
+        <h2>Este circuito no es un dibujo: <em>protege mis propias redes</em></h2>
+        <p>Cada día mis publicaciones de Instagram salen solas. Si el disparador principal se retrasa, este flujo lo rescata y solo entonces avisa por correo. Dale a «Ver el recorrido» o toca cualquier paso.</p>
       </div>
       <div class="circuito-caja">
-        <svg class="circuito-svg" id="circuito-svg" role="img" aria-label="Diagrama del flujo de respaldo de publicación en Instagram, con nueve pasos"></svg>
-        <p class="circuito-leyenda" id="circuito-leyenda" aria-live="polite">Pulsa «ver el recorrido» para seguir el flujo paso a paso.</p>
+        <div class="circuito-barra" aria-hidden="true">
+          <span class="punto-r"></span><span class="punto-a"></span><span class="punto-v"></span>
+          <span class="circuito-titulo">respaldo-instagram · 9 pasos</span>
+          <span class="circuito-estado" id="circuito-estado">en espera</span>
+        </div>
+        <ol class="flujo" id="flujo">
+          <li class="flujo-nodo" data-paso="0">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-0">
+              <span class="flujo-marca" aria-hidden="true">1</span>
+              <span class="flujo-texto"><strong>19:15</strong><small>cada día</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-0">Cada día a las 19:15 se comprueba si la pieza de hoy ya salió en Instagram.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="1">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-1">
+              <span class="flujo-marca" aria-hidden="true">2</span>
+              <span class="flujo-texto"><strong>Registro</strong><small>leer</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-1">Consulta el registro de publicaciones del día en GitHub.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="2">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-2">
+              <span class="flujo-marca" aria-hidden="true">3</span>
+              <span class="flujo-texto"><strong>Calendario</strong><small>leer</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-2">Consulta qué pieza tocaba publicar hoy.</p>
+          </li>
+          <li class="flujo-nodo decision" data-paso="3">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-3">
+              <span class="flujo-marca" aria-hidden="true">4</span>
+              <span class="flujo-texto"><strong>¿Rescatar?</strong><small>decisión</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-3">Compara ambos: si el disparador principal ya publicó, no hace nada.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="4">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-4">
+              <span class="flujo-marca" aria-hidden="true">5</span>
+              <span class="flujo-texto"><strong>Disparar</strong><small>GitHub</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-4">Lanza el mismo flujo de publicación, como si fuera el disparador principal.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="5">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-5">
+              <span class="flujo-marca" aria-hidden="true">6</span>
+              <span class="flujo-texto"><strong>Esperar</strong><small>6 min</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-5">Espera a que la publicación tenga tiempo de completarse.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="6">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-6">
+              <span class="flujo-marca" aria-hidden="true">7</span>
+              <span class="flujo-texto"><strong>Releer</strong><small>registro</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-6">Vuelve a mirar el registro: no da por bueno un aviso sin comprobarlo.</p>
+          </li>
+          <li class="flujo-nodo decision" data-paso="7">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-7">
+              <span class="flujo-marca" aria-hidden="true">8</span>
+              <span class="flujo-texto"><strong>¿Publicó?</strong><small>decisión</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-7">Solo si el registro cambió de verdad se considera un rescate real.</p>
+          </li>
+          <li class="flujo-nodo" data-paso="8">
+            <button class="flujo-boton" data-action="nodo-circuito" aria-describedby="flujo-desc-8">
+              <span class="flujo-marca" aria-hidden="true">9</span>
+              <span class="flujo-texto"><strong>Avisar</strong><small>correo</small></span>
+            </button>
+            <p class="flujo-desc" id="flujo-desc-8">Un correo distinto según lo que pasó: rescatado, fallo de GitHub, o arrancó y no publicó nada.</p>
+          </li>
+        </ol>
+        <div class="flujo-finales" aria-label="Posibles avisos finales">
+          <span class="final ok">Rescatado</span>
+          <span class="final ko">Fallo de GitHub</span>
+          <span class="final aviso">Arrancó y no publicó</span>
+        </div>
+        <p class="circuito-leyenda" id="circuito-leyenda" aria-live="polite">Pulsa «Ver el recorrido» para seguir el flujo paso a paso.</p>
         <div class="circuito-controles">
-          <button class="btn btn-secundario" data-action="ver-circuito">Ver el recorrido</button>
-          <a class="btn-fantasma" href="proyectos/redes-piloto-automatico/">Cómo está montado →</a>
+          <button class="btn btn-primario" data-action="ver-circuito">▶ Ver el recorrido</button>
+          <a class="circuito-enlace" href="proyectos/redes-piloto-automatico/">Cómo está montado →</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- AGENTE EN ACCIÓN -->
-  <section class="seccion bloque-crema">
-    <div class="contenedor">
-      <div class="seccion-cabecera">
+  <section class="seccion bloque-crema" id="agente">
+    <div class="contenedor agente-grid">
+      <div class="agente-texto">
         <p class="etiqueta">Demostración con datos de ejemplo</p>
-        <h2 style="color:var(--crema-tinta)">Así responde un agente en una asesoría</h2>
-        <p>Elige una pregunta como la haría un cliente por WhatsApp. Mira cómo el agente consulta antes de responder, y qué pasa cuando el caso se le escapa de las manos.</p>
+        <h2>Así responde un agente <em>en una asesoría</em></h2>
+        <p class="agente-intro">Elige una pregunta como la haría un cliente por WhatsApp y mira qué hace el agente antes de contestar.</p>
+        <ol class="agente-pasos">
+          <li><span class="agente-n">1</span><div><strong>Consulta antes de hablar</strong><p>Mira el expediente del cliente y la agenda del despacho. No responde de memoria.</p></div></li>
+          <li><span class="agente-n">2</span><div><strong>Resuelve y agenda</strong><p>Contesta con datos concretos y propone una cita con la persona que toca.</p></div></li>
+          <li><span class="agente-n agente-n-humano">3</span><div><strong>Sabe cuándo parar</strong><p>Si el caso necesita criterio profesional, se lo pasa a un asesor con todo el contexto.</p></div></li>
+        </ol>
       </div>
-      <div class="telefono">
-        <div class="telefono-pantalla">
-          <div class="telefono-cabecera"><span class="avatar">A</span> Asistente del despacho</div>
-          <div class="telefono-hilo" id="chat-hilo" aria-live="polite"></div>
-          <div class="chat-opciones" id="chat-opciones">
-            <button class="chat-opcion" data-chat="papeles">¿Qué papeles me faltan para hacer la renta?</button>
-            <button class="chat-opcion" data-chat="plazo">¿Cuándo vence el modelo 303 de este trimestre?</button>
-            <button class="chat-opcion" data-chat="dificil">Me han abierto una inspección, ¿qué hago?</button>
+      <div class="agente-movil">
+        <div class="telefono">
+          <div class="telefono-pantalla">
+            <div class="telefono-cabecera">
+              <span class="avatar" aria-hidden="true">A</span>
+              <span class="telefono-nombre">Asistente del despacho<small id="chat-estado">en línea</small></span>
+            </div>
+            <div class="telefono-hilo" id="chat-hilo" aria-live="polite"></div>
+            <div class="chat-opciones" id="chat-opciones">
+              <p class="chat-opciones-titulo">Toca una pregunta</p>
+              <button class="chat-opcion" data-chat="papeles">¿Qué papeles me faltan para hacer la renta?</button>
+              <button class="chat-opcion" data-chat="plazo">¿Cuándo vence el modelo 303 de este trimestre?</button>
+              <button class="chat-opcion" data-chat="dificil">Me han abierto una inspección, ¿qué hago?</button>
+            </div>
           </div>
         </div>
+        <p class="chat-aviso">Conversación de ejemplo. En tu caso, el agente consulta tu propio expediente y tu propia agenda.</p>
       </div>
-      <p class="chat-aviso">Conversación de ejemplo. En tu caso, el agente consulta tu propio expediente y tu propia agenda.</p>
     </div>
   </section>
 
@@ -390,15 +503,46 @@
     <div class="contenedor">
       <div class="seccion-cabecera">
         <p class="etiqueta">Preguntas frecuentes</p>
-        <h2>Lo que se pregunta antes de empezar</h2>
+        <h2>Lo que se pregunta <em>antes de empezar</em></h2>
+        <p>Pulsa «Descubre» en cada una.</p>
       </div>
-      <div>
-        <details class="faq-item"><summary class="faq-pregunta">¿Cuánto tarda en estar funcionando?<span class="mas">+</span></summary><div class="faq-respuesta">Depende del nivel. Una automatización sin IA puede estar en marcha en días; un agente con acciones necesita su batería de pruebas antes de tocar datos reales.</div></details>
-        <details class="faq-item"><summary class="faq-pregunta">¿Cómo sé si de verdad ahorro dinero?<span class="mas">+</span></summary><div class="faq-respuesta">Con indicadores de tu propio negocio: horas por proceso, errores manuales, tiempo de respuesta al cliente. Se mide antes de construir, en el diagnóstico.</div></details>
-        <details class="faq-item"><summary class="faq-pregunta">¿Qué garantiza que el sistema no se invente respuestas?<span class="mas">+</span></summary><div class="faq-respuesta">La forma en que está construido: busca el documento real antes de responder, comprueba que la respuesta tiene el formato esperado, y pasa el caso a una persona cuando no está seguro.</div></details>
-        <details class="faq-item"><summary class="faq-pregunta">¿Quién mantiene el sistema después?<span class="mas">+</span></summary><div class="faq-respuesta">Queda documentado en tu cuenta, así que puede mantenerlo tu equipo, otro proveedor, o yo mismo con la cuota de mantenimiento opcional.</div></details>
-        <details class="faq-item"><summary class="faq-pregunta">¿Qué pasa con mis datos confidenciales?<span class="mas">+</span></summary><div class="faq-respuesta">El sistema nunca toca tus programas directamente: hay una capa intermedia controlada donde se fijan los límites de lo que puede leer y escribir.</div></details>
-        <details class="faq-item"><summary class="faq-pregunta">¿Puedo empezar por algo pequeño?<span class="mas">+</span></summary><div class="faq-respuesta">Es justo lo que recomiendo: un solo proceso con retorno medible, y ampliar después sobre una base que ya funciona.</div></details>
+      <div class="faq-grid">
+        <article class="faq-tarjeta aparece" style="--i:0">
+          <span class="faq-num" aria-hidden="true">01</span>
+          <h3 class="faq-q" id="faq-q-0">¿Cuánto tarda en estar funcionando?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-0"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-0" role="region" aria-labelledby="faq-q-0" hidden><p>Depende del nivel. <mark class="m1">Una automatización sin IA puede estar en marcha en días</mark>; <mark class="m2">un agente con acciones necesita su batería de pruebas</mark> antes de <mark class="m3">tocar datos reales</mark>.</p></div>
+        </article>
+        <article class="faq-tarjeta aparece" style="--i:1">
+          <span class="faq-num" aria-hidden="true">02</span>
+          <h3 class="faq-q" id="faq-q-1">¿Cómo sé si de verdad ahorro dinero?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-1"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-1" role="region" aria-labelledby="faq-q-1" hidden><p>Con <mark class="m1">indicadores de tu propio negocio</mark>: <mark class="m2">horas por proceso</mark>, <mark class="m3">errores manuales</mark>, <mark class="m4">tiempo de respuesta al cliente</mark>. Se mide <mark class="m1">antes de construir</mark>, en el diagnóstico.</p></div>
+        </article>
+        <article class="faq-tarjeta aparece" style="--i:2">
+          <span class="faq-num" aria-hidden="true">03</span>
+          <h3 class="faq-q" id="faq-q-2">¿Qué garantiza que el sistema no se invente respuestas?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-2"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-2" role="region" aria-labelledby="faq-q-2" hidden><p>La forma en que está construido: <mark class="m1">busca el documento real antes de responder</mark>, <mark class="m2">comprueba que la respuesta tiene el formato esperado</mark>, y <mark class="m4">pasa el caso a una persona cuando no está seguro</mark>.</p></div>
+        </article>
+        <article class="faq-tarjeta aparece" style="--i:3">
+          <span class="faq-num" aria-hidden="true">04</span>
+          <h3 class="faq-q" id="faq-q-3">¿Quién mantiene el sistema después?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-3"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-3" role="region" aria-labelledby="faq-q-3" hidden><p><mark class="m1">Queda documentado en tu cuenta</mark>, así que puede mantenerlo <mark class="m2">tu equipo</mark>, <mark class="m3">otro proveedor</mark>, o <mark class="m4">yo mismo</mark> con la cuota de mantenimiento opcional.</p></div>
+        </article>
+        <article class="faq-tarjeta aparece" style="--i:4">
+          <span class="faq-num" aria-hidden="true">05</span>
+          <h3 class="faq-q" id="faq-q-4">¿Qué pasa con mis datos confidenciales?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-4"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-4" role="region" aria-labelledby="faq-q-4" hidden><p>El sistema <mark class="m4">nunca toca tus programas directamente</mark>: hay una <mark class="m2">capa intermedia controlada</mark> donde se <mark class="m1">fijan los límites de lo que puede leer y escribir</mark>.</p></div>
+        </article>
+        <article class="faq-tarjeta aparece" style="--i:5">
+          <span class="faq-num" aria-hidden="true">06</span>
+          <h3 class="faq-q" id="faq-q-5">¿Puedo empezar por algo pequeño?</h3>
+          <button class="faq-boton" data-action="faq" aria-expanded="false" aria-controls="faq-r-5"><span class="faq-boton-texto">Descubre</span><span class="faq-boton-icono" aria-hidden="true">→</span></button>
+          <div class="faq-r" id="faq-r-5" role="region" aria-labelledby="faq-q-5" hidden><p>Es justo lo que recomiendo: <mark class="m1">un solo proceso con retorno medible</mark>, y <mark class="m2">ampliar después</mark> sobre <mark class="m3">una base que ya funciona</mark>.</p></div>
+        </article>
       </div>
     </div>
   </section>
@@ -452,7 +596,7 @@
 </footer>
 
 <a class="wa-flotante" href="https://wa.me/34931525368" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.85 9.85 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.03c-.25.7-1.24 1.28-2.02 1.45-.55.11-1.26.2-3.66-.79-3.07-1.27-5.05-4.4-5.2-4.6-.15-.2-1.24-1.65-1.24-3.15s.78-2.23 1.06-2.53c.26-.28.58-.35.77-.35h.55c.18 0 .42-.03.65.5.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.48 1.53.3.15.47.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.75.82 2.05.97.3.15.5.23.57.35.08.13.08.73-.17 1.43z"/></svg>
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.85 9.85 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.03c-.25.7-1.240 1.28-2.02 1.45-.55.11-1.26.2-3.66-.79-3.07-1.27-5.05-4.4-5.2-4.6-.15-.2-1.24-1.65-1.24-3.15s.78-2.23 1.06-2.530c.26-.28.58-.35.77-.35h.55c.18 0 .42-.03.65.5.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.48 1.53.3.15.47.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.75.82 2.05.97.3.15.5.23.57.35.08.13.08.73-.17 1.43z"/></svg>
 </a>
 
 <div class="visor" role="dialog" aria-modal="true" aria-label="Pantallas del proyecto">

@@ -1,5 +1,6 @@
 // MPAI Technologies — interacción de la web (sin dependencias externas)
 'use strict';
+document.documentElement.classList.add('js');
 
 /* ---------- Menú móvil ---------- */
 (function menuMovil() {
@@ -13,110 +14,109 @@
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', cierra));
 })();
 
-/* ---------- FAQ (usa <details>, esto solo cierra los demás al abrir uno) ---------- */
-(function faqExclusivo() {
-  const items = document.querySelectorAll('.faq-item');
-  items.forEach((item) => {
-    item.addEventListener('toggle', () => {
-      if (item.open) items.forEach((otro) => { if (otro !== item) otro.open = false; });
+const reduceMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esperar = (ms) => new Promise((r) => setTimeout(r, reduceMovimiento ? Math.min(ms, 150) : ms));
+
+/* ---------- Aparición suave al hacer scroll ---------- */
+(function aparicion() {
+  const els = document.querySelectorAll('.aparece');
+  if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('visible')); return; }
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: .05, rootMargin: '0px 0px -40px 0px' });
+  els.forEach((e) => io.observe(e));
+})();
+
+/* ---------- FAQ: botón «Descubre» por pregunta ---------- */
+(function faqDescubre() {
+  const botones = document.querySelectorAll('[data-action="faq"]');
+  const cerrar = (b) => {
+    b.setAttribute('aria-expanded', 'false');
+    b.querySelector('.faq-boton-texto').textContent = 'Descubre';
+    document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+    b.closest('.faq-tarjeta').classList.remove('abierta');
+  };
+  botones.forEach((b) => {
+    b.addEventListener('click', () => {
+      const abierta = b.getAttribute('aria-expanded') === 'true';
+      botones.forEach(cerrar);
+      if (abierta) return;
+      b.setAttribute('aria-expanded', 'true');
+      b.querySelector('.faq-boton-texto').textContent = 'Ocultar';
+      document.getElementById(b.getAttribute('aria-controls')).hidden = false;
+      b.closest('.faq-tarjeta').classList.add('abierta');
     });
   });
 })();
 
-/* ---------- Circuito animado (flujo real de respaldo de Instagram) ---------- */
+/* ---------- Circuito (flujo real de respaldo de Instagram) ---------- */
 (function circuito() {
-  const svg = document.querySelector('#circuito-svg');
+  const flujo = document.querySelector('#flujo');
   const leyenda = document.querySelector('#circuito-leyenda');
+  const estado = document.querySelector('#circuito-estado');
   const boton = document.querySelector('[data-action="ver-circuito"]');
-  if (!svg || !leyenda) return;
-
-  const nodos = [
-    { id: 'n1', x: 70, texto: '19:15', sub: 'cada día', desc: 'Cada día a las 19:15 se comprueba si la pieza de hoy ya salió en Instagram.' },
-    { id: 'n2', x: 210, texto: 'Registro', sub: 'leer', desc: 'Consulta el registro de publicaciones del día en GitHub.' },
-    { id: 'n3', x: 350, texto: 'Calendario', sub: 'leer', desc: 'Consulta qué pieza tocaba publicar hoy.' },
-    { id: 'n4', x: 490, texto: '¿Rescatar?', sub: 'decisión', desc: 'Compara ambos: si el cron de GitHub ya publicó, no hace nada.', decision: true },
-    { id: 'n5', x: 630, texto: 'Disparar', sub: 'GitHub', desc: 'Lanza el mismo flujo de publicación por API, como si fuera el cron.' },
-    { id: 'n6', x: 770, texto: 'Esperar', sub: '6 min', desc: 'Espera a que la publicación tenga tiempo de completarse.' },
-    { id: 'n7', x: 910, texto: 'Releer', sub: 'registro', desc: 'Vuelve a mirar el registro: no da por bueno un aviso sin comprobarlo.' },
-    { id: 'n8', x: 1050, texto: '¿Publicó?', sub: 'decisión', desc: 'Solo si el registro cambió de verdad se considera un rescate real.', decision: true },
-    { id: 'n9', x: 1190, texto: 'Avisar', sub: 'correo', desc: 'Un correo distinto según lo que pasó: rescatado, fallo de GitHub, o arrancó y no publicó nada.' },
-  ];
-  const y = 60;
-  const w = 1260, h = 130;
-  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-
-  const svgns = 'http://www.w3.org/2000/svg';
-  const crear = (tag, attrs) => {
-    const el = document.createElementNS(svgns, tag);
-    Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-    return el;
+  if (!flujo) return;
+  const nodos = [...flujo.querySelectorAll('.flujo-nodo')];
+  const finalOk = document.querySelector('.final.ok');
+  const texto = (n) => ({ t: n.querySelector('strong').textContent, d: n.querySelector('.flujo-desc').textContent });
+  const pintarLeyenda = (titulo, desc) => {
+    leyenda.textContent = '';
+    const b = document.createElement('strong'); b.textContent = titulo + ' ';
+    leyenda.append(b, desc);
   };
-
-  // líneas
-  for (let i = 0; i < nodos.length - 1; i++) {
-    svg.appendChild(crear('line', {
-      class: 'circuito-linea', x1: nodos[i].x + 22, y1: y, x2: nodos[i + 1].x - 22, y2: y,
-    }));
-  }
-  // nodos
-  nodos.forEach((n) => {
-    const g = crear('g', { class: 'circuito-nodo', id: 'g-' + n.id });
-    g.appendChild(crear('rect', {
-      x: n.x - 22, y: y - 20, width: 44, height: n.decision ? 44 : 40, rx: n.decision ? 22 : 4,
-      transform: n.decision ? `rotate(0 ${n.x} ${y})` : '',
-    }));
-    const t1 = crear('text', { x: n.x, y: y + h / 2 + 4, 'text-anchor': 'middle' });
-    t1.textContent = n.texto;
-    const t2 = crear('text', { x: n.x, y: y + h / 2 + 18, 'text-anchor': 'middle', class: 'sub' });
-    t2.textContent = n.sub;
-    g.appendChild(t1); g.appendChild(t2);
-    svg.appendChild(g);
-  });
-  const paquete = crear('circle', { class: 'circuito-paquete', r: 6, cx: nodos[0].x, cy: y });
-  svg.appendChild(paquete);
+  const ponerEstado = (clase, txt) => { estado.className = 'circuito-estado ' + clase; estado.textContent = txt; };
 
   let animando = false;
   async function recorrer() {
     if (animando) return;
     animando = true;
-    boton && (boton.disabled = true);
-    document.querySelectorAll('.circuito-nodo').forEach((g) => g.classList.remove('activo'));
-    for (let i = 0; i < nodos.length; i++) {
-      const n = nodos[i];
-      document.getElementById('g-' + n.id)?.classList.add('activo');
-      paquete.setAttribute('cx', n.x);
-      leyenda.innerHTML = `<strong>${n.texto}.</strong> ${n.desc}`;
-      await esperar(950);
+    if (boton) boton.disabled = true;
+    nodos.forEach((n) => n.classList.remove('activo', 'hecho'));
+    finalOk?.classList.remove('encendido');
+    ponerEstado('en-marcha', 'en marcha');
+    for (let k = 0; k < nodos.length; k++) {
+      if (k > 0) { nodos[k - 1].classList.remove('activo'); nodos[k - 1].classList.add('hecho'); }
+      nodos[k].classList.add('activo');
+      const { t, d } = texto(nodos[k]);
+      pintarLeyenda(`${k + 1}/9 · ${t}`, d);
+      await esperar(1100);
     }
-    leyenda.innerHTML = '<strong>Recorrido completo.</strong> Este es el flujo real que respalda la publicación diaria en Instagram si el disparador principal se retrasa.';
+    nodos[nodos.length - 1].classList.remove('activo');
+    nodos[nodos.length - 1].classList.add('hecho');
+    finalOk?.classList.add('encendido');
+    ponerEstado('completado', 'completado');
+    pintarLeyenda('Recorrido completo.', 'Publicación rescatada y comprobada antes de avisar. Es el flujo real que respalda mis publicaciones diarias.');
+    if (boton) { boton.disabled = false; boton.textContent = '↻ Ver otra vez'; }
     animando = false;
-    boton && (boton.disabled = false);
   }
-  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
   boton?.addEventListener('click', recorrer);
 
-  // clic/tacto en un nodo suelto también explica su paso
+  // tocar un paso lo ilumina y lo explica
   nodos.forEach((n) => {
-    document.getElementById('g-' + n.id)?.addEventListener('click', () => {
-      leyenda.innerHTML = `<strong>${n.texto}.</strong> ${n.desc}`;
+    n.querySelector('.flujo-boton').addEventListener('click', () => {
+      if (animando) return;
+      nodos.forEach((o) => o.classList.remove('activo'));
+      n.classList.add('activo');
+      const { t, d } = texto(n);
+      pintarLeyenda(`${Number(n.dataset.paso) + 1}/9 · ${t}`, d);
     });
   });
 
-  // arranque automático si el visitante no ha pedido "no reducir movimiento"
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const io = new IntersectionObserver((entradas) => {
-    entradas.forEach((e) => {
-      if (e.isIntersecting && !reduce) { recorrer(); io.disconnect(); }
-    });
-  }, { threshold: .4 });
-  io.observe(svg);
+  // arranca solo la primera vez que se ve (si no se ha pedido reducir movimiento)
+  if (!reduceMovimiento && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => { if (e.isIntersecting) { recorrer(); io.disconnect(); } });
+    }, { threshold: .35 });
+    io.observe(flujo);
+  }
 })();
 
 /* ---------- Chat del agente (guionizado) ---------- */
 (function chatAgente() {
   const hilo = document.querySelector('#chat-hilo');
   const opciones = document.querySelector('#chat-opciones');
-  const reiniciar = document.querySelector('[data-action="reiniciar-chat"]');
+  const estadoChat = document.querySelector('#chat-estado');
+  const pasosLista = document.querySelectorAll('.agente-pasos li');
   if (!hilo || !opciones) return;
 
   const guiones = {
@@ -146,39 +146,53 @@
     },
   };
 
-  function limpiar() { hilo.innerHTML = ''; }
+  // qué tarjeta de la izquierda se ilumina según el tipo de mensaje
+  const tarjetaPorTipo = { paso: 0, agente: 1, humano: 2 };
+  const marcarPaso = (idx) => pasosLista.forEach((li, k) => li.classList.toggle('activo', k === idx));
+
   function burbuja(tipo, texto) {
     const div = document.createElement('div');
     div.className = 'burbuja ' + tipo;
     div.textContent = texto;
     hilo.appendChild(div);
     hilo.scrollTop = hilo.scrollHeight;
+    return div;
   }
-  const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function escribiendo(ms) {
+    const div = document.createElement('div');
+    div.className = 'burbuja escribiendo';
+    div.setAttribute('aria-label', 'Escribiendo');
+    for (let k = 0; k < 3; k++) div.appendChild(document.createElement('span'));
+    hilo.appendChild(div);
+    hilo.scrollTop = hilo.scrollHeight;
+    if (estadoChat) estadoChat.textContent = 'escribiendo…';
+    await esperar(ms);
+    div.remove();
+    if (estadoChat) estadoChat.textContent = 'en línea';
+  }
 
+  let ocupado = false;
   async function ejecutar(clave) {
     const guion = guiones[clave];
-    if (!guion) return;
+    if (!guion || ocupado) return;
+    ocupado = true;
     opciones.querySelectorAll('button').forEach((b) => (b.disabled = true));
-    limpiar();
+    hilo.textContent = '';
     burbuja('cliente', guion.pregunta);
     await esperar(500);
     for (const paso of guion.pasos) {
-      await esperar(700);
-      burbuja(paso.tipo, paso.texto);
+      marcarPaso(tarjetaPorTipo[paso.tipo]);
+      if (paso.tipo === 'paso') { await esperar(400); burbuja('paso', paso.texto); await esperar(700); }
+      else { await escribiendo(1000); burbuja(paso.tipo, paso.texto); await esperar(500); }
     }
     opciones.querySelectorAll('button').forEach((b) => (b.disabled = false));
+    ocupado = false;
   }
 
   opciones.querySelectorAll('[data-chat]').forEach((b) => {
     b.addEventListener('click', () => ejecutar(b.getAttribute('data-chat')));
   });
-  reiniciar?.addEventListener('click', () => {
-    limpiar();
-    burbuja('agente', 'Hola, soy el asistente del despacho. Elige una pregunta de ejemplo abajo para ver cómo respondo.');
-  });
-  // estado inicial
-  burbuja('agente', 'Hola, soy el asistente del despacho. Elige una pregunta de ejemplo abajo para ver cómo respondo.');
+  burbuja('agente', 'Hola, soy el asistente del despacho. Toca una de las preguntas de abajo y mira cómo respondo.');
 })();
 
 /* ---------- Calculadora de ahorro ---------- */
