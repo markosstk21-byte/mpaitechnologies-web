@@ -1,742 +1,463 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<title>MPAI Technologies — Automatización y agentes de IA para pymes</title>
+<meta name="description" content="Encuentro las tareas repetitivas de tu negocio y las automatizo. Diagnóstico inicial gratuito, sistemas entregados en tu propia cuenta y te digo cuándo no hace falta IA.">
+<link rel="canonical" href="https://mpaitechnologies.es/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MPAI Technologies — Automatización y agentes de IA para pymes">
+<meta property="og:description" content="Encuentro las tareas repetitivas de tu negocio y las automatizo. Diagnóstico inicial gratuito y sistemas que quedan en tu cuenta.">
+<meta property="og:url" content="https://mpaitechnologies.es/">
+<meta property="og:image" content="https://mpaitechnologies.es/assets/vista-previa.jpg">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo-mpai.png">
+<link rel="stylesheet" href="css/estilos.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"MPAI Technologies","image":"https://mpaitechnologies.es/assets/logo-mpai.png","url":"https://mpaitechnologies.es/","telephone":"+34931525368","email":"info@mpaitechnologies.es","address":{"@type":"PostalAddress","streetAddress":"C/ Mirador, 8","addressLocality":"Sant Fost de Campsentelles","addressRegion":"Barcelona","postalCode":"08105","addressCountry":"ES"},"founder":{"@type":"Person","name":"Marco Pavón Cobo"},"areaServed":"ES","priceRange":"€€"}
+</script>
+<!-- Analítica sin cookies (GoatCounter) — PENDIENTE DE ACTIVAR.
+     1. Crea tu cuenta gratuita en https://www.goatcounter.com/ (sin cookies, sin banner de consentimiento).
+     2. Cambia TU-CODIGO por el código que te den.
+     3. Quita las marcas <!- - y - -> de las dos líneas siguientes en TODAS las páginas.
+<script data-goatcounter="https://TU-CODIGO.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+-->
 </head>
 <body>
-<x-dc>
-<helmet>
-  <link rel="stylesheet" href="_ds/broadsheet-7f654d42-b05f-4f7b-b0c7-27b53d57a5e2/styles.css">
-  <script src="_ds/broadsheet-7f654d42-b05f-4f7b-b0c7-27b53d57a5e2/_ds_bundle.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
-  <style>
-    html { scroll-behavior: smooth; }
-    body { margin: 0; text-wrap: pretty; -webkit-font-smoothing: antialiased; }
-    a { color: var(--color-accent-700); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    a:hover { color: var(--color-accent-600); }
-    ::selection { background: var(--color-accent-200); }
-    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-    @keyframes mpai-watermark { from { transform: translate3d(0, -7vh, 0) } to { transform: translate3d(0, 7vh, 0) } }
-    .mpai-wm { animation: mpai-watermark linear both; animation-timeline: scroll(root); }
-  </style>
-</helmet>
 
-<div style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100%; overflow-x: clip;">
+<a href="#contenido" class="solo-lectores">Ir al contenido</a>
 
-  <sc-if value="{{ verMarcaDeAgua }}" hint-placeholder-val="{{ true }}">
-    <div aria-hidden="true" style="position: fixed; inset: -10vh 0; z-index: 0; pointer-events: none; display: grid; place-items: center; overflow: hidden;">
-      <img class="mpai-wm" ref="{{ wmRef }}" src="assets/marca-agua.png" alt="" style="width: min(128vh, 118vw); max-width: none; opacity: 0.085; mix-blend-mode: multiply; will-change: transform;">
+<header class="cabecera">
+  <div class="contenedor cabecera-fila">
+    <a href="#top" class="cabecera-logo"><span class="punto" aria-hidden="true"></span>MPAI Technologies</a>
+    <nav class="cabecera-nav" aria-label="Principal">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="proyectos/">Proyectos</a>
+      <a href="#sectores">Sectores</a>
+      <a href="#precios">Precios</a>
+    </nav>
+    <div class="cabecera-acciones">
+      <a class="btn btn-primario" href="#contacto">Reservar llamada</a>
+      <button class="btn btn-secundario cabecera-menu-boton" data-action="abrir-menu" aria-label="Abrir menú">☰</button>
     </div>
-  </sc-if>
+  </div>
+</header>
 
-  <sc-if value="{{ lbAbierto }}" hint-placeholder-val="{{ false }}">
-    <div role="dialog" aria-modal="true" aria-label="Pantallas del proyecto" onClick="{{ lbCerrar }}" style="position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; gap: 18px; padding: clamp(16px, 3vw, 40px); background: color-mix(in srgb, var(--color-neutral-900) 88%, transparent); overflow: auto;">
-
-      <div style="display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap; color: var(--color-neutral-100);">
-        <div>
-          <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.72;">Proyecto</span>
-          <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(20px, 2.4vw, 28px); line-height: 34px; letter-spacing: -0.01em; margin: 8px 0 0;">{{ lbTitulo }}</h2>
-        </div>
-        <div style="margin-left: auto; display: flex; align-items: center; gap: 12px;">
-          <span style="font-size: 15px; opacity: 0.8;">{{ lbPosicion }}</span>
-          <button type="button" onClick="{{ lbCerrar }}" aria-label="Cerrar" style="display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid color-mix(in srgb, var(--color-neutral-100) 40%, transparent); border-radius: var(--radius-sm); background: transparent; color: var(--color-neutral-100); font-family: var(--font-body); font-size: 22px; cursor: pointer;" style-hover="background: color-mix(in srgb, var(--color-neutral-100) 14%, transparent);">
-            <i class="ph-duotone ph-x"></i>
-          </button>
-        </div>
-      </div>
-
-      <div onClick="{{ lbNoPropagar }}" style="flex: 1; min-height: 0; display: flex; align-items: center; gap: clamp(8px, 2vw, 20px);">
-        <button type="button" onClick="{{ lbAnterior }}" aria-label="Pantalla anterior" style="flex: none; display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid color-mix(in srgb, var(--color-neutral-100) 40%, transparent); border-radius: var(--radius-sm); background: transparent; color: var(--color-neutral-100); font-size: 24px; cursor: pointer;" style-hover="background: color-mix(in srgb, var(--color-neutral-100) 14%, transparent);">
-          <i class="ph-duotone ph-caret-left"></i>
-        </button>
-        <figure style="flex: 1; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; align-items: center;">
-          <img ref="{{ lbImgRef }}" alt="{{ lbPie }}" style="display: block; max-width: 100%; max-height: 64vh; width: auto; height: auto; border: 1px solid color-mix(in srgb, var(--color-neutral-100) 24%, transparent); background: var(--color-bg);">
-          <figcaption style="max-width: 68ch; text-align: center; color: var(--color-neutral-100); font-size: 16px; line-height: 26px;">{{ lbPie }}</figcaption>
-        </figure>
-        <button type="button" onClick="{{ lbSiguiente }}" aria-label="Pantalla siguiente" style="flex: none; display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid color-mix(in srgb, var(--color-neutral-100) 40%, transparent); border-radius: var(--radius-sm); background: transparent; color: var(--color-neutral-100); font-size: 24px; cursor: pointer;" style-hover="background: color-mix(in srgb, var(--color-neutral-100) 14%, transparent);">
-          <i class="ph-duotone ph-caret-right"></i>
-        </button>
-      </div>
-
-      <div onClick="{{ lbNoPropagar }}" style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-        <sc-for list="{{ lbMiniaturas }}" as="mini" hint-placeholder-count="4">
-          <button type="button" onClick="{{ mini.ir }}" style="display: block; padding: 0; border: 2px solid {{ mini.borde }}; background: var(--color-bg); cursor: pointer; opacity: {{ mini.activa }};">
-            <img src="{{ mini.src }}" alt="" style="display: block; width: clamp(96px, 13vw, 150px); height: auto;">
-          </button>
-        </sc-for>
-      </div>
-
-      <p onClick="{{ lbNoPropagar }}" style="margin: 0; text-align: center; font-size: 14px; line-height: 22px; color: color-mix(in srgb, var(--color-neutral-100) 72%, transparent);">Flechas del teclado para pasar de pantalla · Escape para cerrar</p>
-    </div>
-  </sc-if>
-
-  <div style="position: relative; z-index: 1;">
-
-  <nav class="nav" style="position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--color-bg) 92%, transparent); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 12px clamp(20px, 5vw, 72px); border-bottom: 1px solid var(--color-divider);">
-    <a href="#top" class="nav-brand" style="font-family: var(--font-heading); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; color: var(--color-text); margin-right: auto;">MPAI Technologies</a>
-    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 14px;">
-      <a href="#servicios" style="text-decoration: none;">Servicios</a>
-      <a href="#proyectos" style="text-decoration: none;">Proyectos</a>
-      <a href="#criterio" style="text-decoration: none;">Criterio</a>
-      <a href="#precios" style="text-decoration: none;">Inversión</a>
-      <a href="#metodo" style="text-decoration: none;">Método</a>
-      <a href="#cumplimiento" style="text-decoration: none;">Cumplimiento</a>
-      <a class="btn btn-primary" href="{{ waHref }}" target="_blank" rel="noopener" style="text-decoration: none;"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 17px;"></i>WhatsApp</a>
-    </div>
+<div class="menu-movil" role="dialog" aria-modal="true" aria-label="Menú">
+  <div class="menu-movil-cabecera">
+    <span class="cabecera-logo"><span class="punto" aria-hidden="true"></span>MPAI Technologies</span>
+    <button class="btn btn-secundario" data-action="cerrar-menu" aria-label="Cerrar menú">✕</button>
+  </div>
+  <nav>
+    <a href="#como-funciona" data-action="cerrar-menu">Cómo funciona</a>
+    <a href="proyectos/" data-action="cerrar-menu">Proyectos</a>
+    <a href="#sectores" data-action="cerrar-menu">Sectores</a>
+    <a href="#precios" data-action="cerrar-menu">Precios</a>
+    <a href="#contacto" data-action="cerrar-menu">Contacto</a>
   </nav>
-
-  <div id="top" style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-
-    <section style="padding: clamp(48px, 8vw, 112px) 0 56px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Consultoría de automatización e inteligencia artificial · Barcelona</span>
-      <h1 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(38px, 5.4vw, 70px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 0 -0.035em;">
-        <span class="cmyk-head" style="position: relative; display: block;"><span class="paper">Automatización y agentes de IA</span><span class="plate plate-c" aria-hidden="true">Automatización y agentes de IA</span><span class="plate plate-m" aria-hidden="true">Automatización y agentes de IA</span><span class="plate plate-y" aria-hidden="true">Automatización y agentes de IA</span></span>
-        <span style="display: block;">para pymes, con estándar de producción.</span>
-      </h1>
-      <p style="font-size: 19px; line-height: 32px; max-width: 58ch; margin: 36px 0 0;">Diseño, construyo e implanto los sistemas que resuelven un proceso concreto de su negocio: automatizaciones, aplicaciones web, paneles de control y agentes de inteligencia artificial.</p>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 28px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Cada proyecto se entrega documentado, en la cuenta del propio cliente y con el control de errores, la validación de salida y el registro de decisiones que exige cualquier sistema que va a funcionar todos los días.</p>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 36px;">
-        <a class="btn btn-primary" href="{{ waHref }}" target="_blank" rel="noopener" style="text-decoration: none; min-height: 46px; padding-inline: 20px; font-size: 16px;"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 19px;"></i>Hablar por WhatsApp</a>
-        <a class="btn btn-secondary" href="{{ mailHref }}" style="text-decoration: none; min-height: 46px; padding-inline: 20px; font-size: 16px; color: var(--color-text);"><i class="ph-duotone ph-envelope-simple" style="font-size: 19px;"></i>Escribir un correo</a>
-        <a class="btn btn-ghost" href="#proyectos" style="text-decoration: none; min-height: 46px; padding-inline: 12px; font-size: 16px;">Ver proyectos</a>
-      </div>
-      <p style="font-size: 15px; line-height: 26px; margin: 20px 0 0; color: var(--color-accent-700);">Diagnóstico inicial gratuito y sin compromiso.</p>
-    </section>
-
-    <section aria-label="MPAI Technologies, en cifras" style="padding: 8px 0 72px;">
-      <hr style="height: 5px; border: 0; margin: 0; border-top: 2px solid var(--color-text); border-bottom: 1px solid var(--color-text);">
-      <p style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px 28px; margin: 0; padding: 14px 0; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);">
-        <span>Marco Pavón Cobo</span>
-        <span>Consultoría · Automatización · Formación</span>
-        <span>Interlocución directa</span>
-        <span>Alcance y precio cerrados</span>
-      </p>
-      <hr style="height: 0; border: 0; border-top: 1px solid var(--color-text); margin: 0;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px 70px; padding: 14px 0 28px;">
-        <p style="display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 16px; line-height: 28px;"><span>Proyectos entregados a cliente</span><span style="flex: 1; min-width: 28px; align-self: flex-end; margin-bottom: 0.34em; border-bottom: 1px dotted color-mix(in srgb, var(--color-text) 45%, transparent);"></span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px; color: var(--color-accent-700);">4</span></p>
-        <p style="display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 16px; line-height: 28px;"><span>Niveles de solución catalogados</span><span style="flex: 1; min-width: 28px; align-self: flex-end; margin-bottom: 0.34em; border-bottom: 1px dotted color-mix(in srgb, var(--color-text) 45%, transparent);"></span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">6</span></p>
-        <p style="display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 16px; line-height: 28px;"><span>Diagnóstico inicial del proceso</span><span style="flex: 1; min-width: 28px; align-self: flex-end; margin-bottom: 0.34em; border-bottom: 1px dotted color-mix(in srgb, var(--color-text) 45%, transparent);"></span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">Gratuito</span></p>
-        <p style="display: flex; align-items: baseline; gap: 8px; margin: 0; font-size: 16px; line-height: 28px;"><span>Sistemas entregados en la cuenta del cliente</span><span style="flex: 1; min-width: 28px; align-self: flex-end; margin-bottom: 0.34em; border-bottom: 1px dotted color-mix(in srgb, var(--color-text) 45%, transparent);"></span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 17px;">100%</span></p>
-      </div>
-      <hr style="height: 0; border: 0; border-top: 1px solid var(--color-text); margin: 0;">
-    </section>
-
-    <section id="servicios" style="padding: 24px 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Servicios</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 24ch;">Cuatro formas de aplicar la IA a un negocio, de menos a más complejo</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">El primer trabajo es diagnosticar el proceso real y elegir la solución mínima que lo resuelve, de modo que la inversión vaya al resultado y no a la tecnología.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 42px clamp(28px, 4vw, 64px); margin-top: 48px;">
-        <div>
-          <i class="ph-duotone ph-gear" style="font-size: 32px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 23px; line-height: 28px; letter-spacing: -0.01em; margin: 18px 0 0;">Automatización de procesos</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Flujos construidos en n8n, la herramienta que conecta programas entre sí, que unen correo, CRM, facturación y agenda. Sin modelo de IA cuando el proceso no lo necesita: más económico, más rápido y sin margen de invención.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-chart-line-up" style="font-size: 32px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 23px; line-height: 28px; letter-spacing: -0.01em; margin: 18px 0 0;">Aplicaciones web y paneles</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Herramientas a medida que reúnen en una sola pantalla lo que hoy está repartido entre hojas de cálculo, mensajes y la memoria del equipo: reservas, pedidos, cartera de clientes, estado de un proceso y métricas del negocio.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-files" style="font-size: 32px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 23px; line-height: 28px; letter-spacing: -0.01em; margin: 18px 0 0;">Agentes con documentos (RAG)</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">RAG consiste en recuperar el fragmento exacto de un documento y entregárselo al modelo antes de responder. Así el agente contesta sobre el catálogo, la normativa interna o las preguntas frecuentes citando la fuente real.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-robot" style="font-size: 32px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 23px; line-height: 28px; letter-spacing: -0.01em; margin: 18px 0 0;">Agentes con acciones</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Además de responder, el agente escribe en el CRM, agenda una cita o clasifica un caso, con límite de iteraciones, validación de salida y escalado a una persona cuando el nivel de confianza no es suficiente.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section id="proyectos" style="background: var(--color-accent-100); padding: 72px 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px;">Proyectos realizados</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">Sistemas en uso, con las pantallas reales de cada uno</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Cada pieza se construyó para un proceso concreto de un negocio concreto. Las piezas de demostración están señaladas como tales: los datos son de ejemplo, el funcionamiento es real.</p>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 64px clamp(28px, 4vw, 56px); margin-top: 48px;">
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.crm }}" onKeyDown="{{ teclaAbrir.crm }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/crm.png" alt="Panel del CRM de consultoría energética con indicadores, licencias, integraciones y buzón de alertas" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent">CRM a medida</span>
-            <span class="tag tag-outline">Cliente</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">CRM para consultoría energética</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Plataforma multiempresa para asesorías energéticas: carteras de puntos de suministro, descarga de curvas de consumo de Datadis y precios de OMIE, cálculo de ahorro según la Circular 3/2020 de la CNMC, auditoría de facturas y liquidación de comisiones a la red comercial.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Aislamiento entre empresas por políticas de base de datos y etiquetado obligatorio del origen de cada cifra: real, calculada, estimada o simulada.</p>
-          <a class="btn btn-secondary" href="{{ waProy.crm }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.cantera }}" onKeyDown="{{ teclaAbrir.cantera }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/cantera.png" alt="Panel de Cantera: cobro del mes, morosidad, evolución de la temporada y plantilla por categoría" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent">Plataforma de gestión</span>
-            <span class="tag tag-outline">Cliente</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">Cantera — gestión de clubes de fútbol base</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Inscripciones, cuotas, morosidad, plantilla por categoría, documentación con caducidad y comunicación con las familias, en un panel que usan directivas sin perfil técnico. Con acceso separado para familias y para entrenadores.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Los dos consentimientos de un menor (tratamiento de datos y derecho de imagen) se recogen por separado, como exige la normativa.</p>
-          <video controls preload="metadata" playsinline poster="assets/video/cantera-reel-poster.jpg" style="display: block; width: 100%; margin-top: 18px; border: 1px solid var(--color-divider); background: var(--color-neutral-900);">
-            <source src="assets/video/cantera-reel.mp4" type="video/mp4">
-          </video>
-          <a class="btn btn-secondary" href="{{ waProy.cantera }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.distail }}" onKeyDown="{{ teclaAbrir.distail }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/distail.png" alt="Guía visual de la arquitectura de recepción y captación con IA" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent-2">Arquitectura</span>
-            <span class="tag tag-outline">Cliente</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">Distail — recepción y captación con IA</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Diseño de la arquitectura completa: qué tramo resuelve un agente conversacional al atender una llamada y qué tramo resuelve un flujo determinista al crear la cita y actualizar el CRM, con el motivo documentado junto a cada decisión.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Entregado como guía visual y como presentación, para que el cliente pueda auditar el sistema que financia.</p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 18px;">
-            <video controls preload="metadata" playsinline poster="assets/video/distail-arquitectura-poster.jpg" style="display: block; width: 100%; border: 1px solid var(--color-divider); background: var(--color-neutral-900);">
-              <source src="assets/video/distail-arquitectura.mp4" type="video/mp4">
-            </video>
-            <video controls preload="metadata" playsinline poster="assets/video/distail-precision-poster.jpg" style="display: block; width: 100%; border: 1px solid var(--color-divider); background: var(--color-neutral-900);">
-              <source src="assets/video/distail-precision.mp4" type="video/mp4">
-            </video>
-          </div>
-          <a class="btn btn-secondary" href="{{ waProy.distail }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.rustik }}" onKeyDown="{{ teclaAbrir.rustik }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/rustik.png" alt="Web de Rustik Gastro Bar con carta, galería y reserva de mesa" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent">Web y panel</span>
-            <span class="tag tag-outline">Cliente</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">Rustik Gastro Bar — carta y reservas</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Sitio del restaurante con carta, galería, carta descargable y reserva de mesa, más un panel de administración para que el propio negocio actualice platos y precios sin intermediarios.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Los datos de la carta residen en un archivo propio del cliente: se edita y se publica.</p>
-          <a class="btn btn-secondary" href="{{ waProy.rustik }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.facturetool }}" onKeyDown="{{ teclaAbrir.facturetool }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/facturetool.png" alt="FactureTool: formulario de nueva factura con datos del cliente y vencimientos" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent">Aplicación web</span>
-            <span class="tag tag-outline">Herramienta propia</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">FactureTool — facturación para autónomos</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Emisión de facturas con numeración correlativa, vencimientos automáticos y resumen por trimestres con exportación para la gestoría: IVA repercutido para el modelo 303 y retenciones para el 130, separando emitidas de borradores.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Funciona íntegramente en el navegador, sin servidor ni base de datos que mantener.</p>
-          <a class="btn btn-secondary" href="{{ waProy.facturetool }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-        <article>
-          <figure class="{{ shotClass }}" role="button" tabindex="0" onClick="{{ abrir.barbershop }}" onKeyDown="{{ teclaAbrir.barbershop }}" style="margin: 0; position: relative; border: 1px solid var(--color-divider); background: var(--color-bg); box-shadow: var(--shadow-md); cursor: zoom-in;" style-hover="box-shadow: var(--shadow-lg); border-color: var(--color-accent);">
-            <img src="assets/proyectos/barbershop.png" alt="Barber Shop: selección de servicios y reserva de cita paso a paso" style="display: block; width: 100%; height: auto;">
-            <figcaption style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: color-mix(in srgb, var(--color-neutral-900) 84%, transparent); color: var(--color-neutral-100); font-size: 14px; line-height: 20px;"><i class="ph-duotone ph-images" style="font-size: 18px;"></i>4 pantallas · pulsa para verlas</figcaption>
-          </figure>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
-            <span class="tag tag-accent">Reservas</span>
-            <span class="tag tag-outline">Demostración</span>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.01em; margin: 14px 0 0;">Barber Shop — cita online en tres pasos</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Selección de varios servicios en la misma cita, duración y precio visibles antes de confirmar, y acceso de administración para el negocio. Pensado para locales que hoy gestionan la agenda por mensajería.</p>
-          <p style="font-size: 15px; line-height: 26px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Pieza de demostración con datos de ejemplo, sobre el catálogo de servicios real del sector.</p>
-          <a class="btn btn-secondary" href="{{ waProy.barbershop }}" target="_blank" rel="noopener" style="text-decoration: none; margin-top: 18px; min-height: 44px; padding-inline: 16px; color: var(--color-text);"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 18px;"></i>Quiero algo así</a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-
-    <section id="criterio" style="padding: 72px 0;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Criterio técnico</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">Cuándo basta un flujo y cuándo hace falta un agente</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 32px; color: color-mix(in srgb, var(--color-text) 78%, transparent);">La decisión se toma leyendo el proceso, no el catálogo de tecnología. Esta es la tabla con la que se decide en el diagnóstico inicial.</p>
-      <div style="overflow-x: auto;">
-        <table class="table" style="min-width: 680px;">
-          <thead>
-            <tr><th>Señal en el proceso</th><th>Automatización sin IA</th><th>Agente de IA</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Las reglas se pueden escribir: si ocurre esto, haz aquello</td><td style="color: var(--color-accent-700); font-weight: 600;">Suficiente</td><td>No aporta nada y encarece</td></tr>
-            <tr><td>La entrada es texto libre: correos, notas, mensajes de clientes</td><td>Se atasca en los casos no previstos</td><td style="color: var(--color-accent-700); font-weight: 600;">Clasificar y extraer datos</td></tr>
-            <tr><td>Hay que consultar documentación extensa para responder</td><td>No resuelve</td><td style="color: var(--color-accent-700); font-weight: 600;">RAG con cita de la fuente</td></tr>
-            <tr><td>La decisión tiene excepciones frecuentes</td><td>Cada excepción es una rama más</td><td style="color: var(--color-accent-700); font-weight: 600;">Con escalado a una persona</td></tr>
-            <tr><td>El volumen es alto y el coste por ejecución es determinante</td><td style="color: var(--color-accent-700); font-weight: 600;">Céntimos por ejecución</td><td>Se mide y se presupuesta antes</td></tr>
-            <tr><td>El proceso todavía no está definido por escrito</td><td>Se define primero</td><td>Se define primero</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size: 15px; line-height: 26px; margin: 20px 0 0; max-width: 62ch; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Consecuencia práctica: una parte de lo que se solicita como «un agente de IA» se resuelve mejor con automatización clásica, y el presupuesto baja con ella.</p>
-    </section>
-
-    <section id="diferencia" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px clamp(24px, 5vw, 88px); align-items: start; padding: 0 0 72px;">
-      <div>
-        <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Quién lo hace</span>
-        <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0;">El diferenciador no es la tecnología</h2>
-        <p style="font-size: 17px; line-height: 28px; margin: 24px 0 0; max-width: 48ch; color: color-mix(in srgb, var(--color-text) 78%, transparent);">La tecnología está al alcance de cualquiera. Lo que cambia el resultado es el criterio: qué se automatiza primero, qué no se toca, y qué hace el sistema cuando no está seguro.</p>
-        <p style="font-size: 17px; line-height: 28px; margin: 24px 0 0; max-width: 48ch;">Marco Pavón Cobo — consultoría de automatización y agentes de inteligencia artificial, prestada como profesional autónomo bajo el nombre comercial MPAI Technologies.</p>
-      </div>
-      <figure class="cmyk" style="margin: 0;">
-        <img src="assets/marco.jpeg" alt="Marco Pavón Cobo, MPAI Technologies" style="display: block; width: 100%; height: auto;">
-        <img class="sep-c" src="assets/marco.jpeg" alt="" aria-hidden="true">
-        <img class="sep-m" src="assets/marco.jpeg" alt="" aria-hidden="true">
-        <img class="sep-y" src="assets/marco.jpeg" alt="" aria-hidden="true">
-        <img class="sep-k" src="assets/marco.jpeg" alt="" aria-hidden="true">
-      </figure>
-    </section>
-
-    <section style="padding: 0 0 72px;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 42px clamp(28px, 4vw, 64px);">
-        <div>
-          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--color-accent-700); letter-spacing: 0.04em;">01</span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; line-height: 28px; margin: 10px 0 0;">Diagnóstico antes de propuesta</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">El primer entregable es el proceso real puesto por escrito, con el punto exacto donde se pierden horas y el retorno estimado de resolverlo.</p>
-        </div>
-        <div>
-          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--color-accent-700); letter-spacing: 0.04em;">02</span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; line-height: 28px; margin: 10px 0 0;">Estándar de producción</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Control de errores por rama, límite de iteraciones, validación de salida, escalado explícito a una persona, registro de decisiones y coste por ejecución estimado antes de cerrar precio.</p>
-        </div>
-        <div>
-          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--color-accent-700); letter-spacing: 0.04em;">03</span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; line-height: 28px; margin: 10px 0 0;">Propiedad del cliente</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Los flujos y el código quedan en la cuenta del propio negocio, documentados, de forma que otro profesional pueda continuarlos.</p>
-        </div>
-        <div>
-          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--color-accent-700); letter-spacing: 0.04em;">04</span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; line-height: 28px; margin: 10px 0 0;">Traducción sin jerga</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Qué es una llamada a herramienta, RAG o MCP, explicado en términos de negocio y por escrito, para quien decide sin base técnica.</p>
-        </div>
-      </div>
-    </section>
-
-    <section style="padding: 0 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Para quién</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">Pymes y despachos profesionales sin departamento técnico</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 32px; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Aplica a cualquier organización con un proceso manual identificable y una persona con capacidad de decisión.</p>
-      <div style="overflow-x: auto;">
-        <table class="table" style="min-width: 560px;">
-          <thead>
-            <tr><th>Perfil</th><th>Qué le importa</th><th>Qué obtiene</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Dirección de asesoría</td><td>Que el equipo deje de dedicar horas a tareas mecánicas</td><td>El proceso que conviene automatizar primero y el ahorro estimado</td></tr>
-            <tr><td>Responsable de operaciones</td><td>Que no se rompa nada de lo que ya funciona</td><td>Escalado a persona y registro: si algo falla, se ve y se corrige</td></tr>
-            <tr><td>Dirección de negocio local</td><td>Dejar de gestionar la agenda por mensajería</td><td>Reservas, carta o citas en una herramienta propia, con panel de gestión</td></tr>
-            <tr><td>Departamento comercial</td><td>Cartera y vencimientos bajo control</td><td>CRM a medida con alertas de lo que hay que atender esta semana</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-
-  <sc-if value="{{ verPrecios }}" hint-placeholder-val="{{ true }}">
-    <section id="precios" style="background: var(--color-accent-100); padding: 72px 0;">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-        <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px;">Inversión</span>
-        <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">Seis niveles de solución, con su rango de inversión</h2>
-        <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 32px; color: color-mix(in srgb, var(--color-text) 80%, transparent);">Se sube de nivel cuando el negocio lo necesita, no el primer día. Publicar los rangos permite valorar el encaje antes de la primera conversación.</p>
-        <div style="overflow-x: auto;">
-          <table class="table" style="min-width: 680px;">
-            <thead>
-              <tr><th style="width: 56px;">Nivel</th><th>Qué es</th><th>Cuándo aplica</th><th style="text-align: right;">Rango</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">0</td><td>Diagnóstico del proceso</td><td>Siempre el primer paso, antes de proponer solución</td><td style="text-align: right; white-space: nowrap;">Gratuito — 300 €</td></tr>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">1</td><td>Automatización sin IA</td><td>Proceso estructurado y reglas conocidas</td><td style="text-align: right; white-space: nowrap;">400 — 900 €</td></tr>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">2</td><td>Clasificación o extracción con un modelo</td><td>Etiquetar correos, extraer datos de una factura</td><td style="text-align: right; white-space: nowrap;">700 — 1.800 €</td></tr>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">3</td><td>Agente con documentos (RAG)</td><td>Responder sobre catálogo, normativa o preguntas frecuentes</td><td style="text-align: right; white-space: nowrap;">1.500 — 3.500 €</td></tr>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">4</td><td>Agente con acciones</td><td>Además de responder, escribe en el CRM o en la agenda</td><td style="text-align: right; white-space: nowrap;">2.500 — 6.000 €</td></tr>
-              <tr><td style="font-family: var(--font-heading); font-weight: 600;">5</td><td>Orquestador con subagentes</td><td>Sistema completo con varias ramas de proceso</td><td style="text-align: right; white-space: nowrap;">Desde 5.000 €</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size: 15px; line-height: 26px; margin: 20px 0 0; max-width: 62ch; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Rangos orientativos, ajustados a cada proyecto. La cotización es por alcance cerrado y no por horas. Cuota de mantenimiento opcional de 80 a 200 € al mes según la criticidad del sistema.</p>
-      </div>
-    </section>
-  </sc-if>
-
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-
-    <section id="metodo" style="padding: 72px 0;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Método</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 24ch;">De la primera conversación al mantenimiento</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 42px clamp(28px, 4vw, 56px); margin-top: 48px;">
-        <div>
-          <span class="cmyk-num" style="display: block; font-family: var(--font-heading); font-weight: 600; font-size: 44px;"><span class="paper">1</span><span class="plate plate-c" aria-hidden="true">1</span><span class="plate plate-m" aria-hidden="true">1</span><span class="plate plate-y" aria-hidden="true">1</span></span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 21px; line-height: 28px; margin: 20px 0 0;">Diagnóstico inicial</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Conversación breve y sin coste para entender el proceso real. Concluye en una propuesta con alcance y precio cerrado cuando hay encaje.</p>
-        </div>
-        <div>
-          <span class="cmyk-num" style="display: block; font-family: var(--font-heading); font-weight: 600; font-size: 44px;"><span class="paper">2</span><span class="plate plate-c" aria-hidden="true">2</span><span class="plate plate-m" aria-hidden="true">2</span><span class="plate plate-y" aria-hidden="true">2</span></span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 21px; line-height: 28px; margin: 20px 0 0;">Propuesta con alcance cerrado</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Qué se automatiza, qué nivel de solución aplica y qué queda fuera, definido por escrito antes de empezar.</p>
-        </div>
-        <div>
-          <span class="cmyk-num" style="display: block; font-family: var(--font-heading); font-weight: 600; font-size: 44px;"><span class="paper">3</span><span class="plate plate-c" aria-hidden="true">3</span><span class="plate plate-m" aria-hidden="true">3</span><span class="plate plate-y" aria-hidden="true">3</span></span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 21px; line-height: 28px; margin: 20px 0 0;">Construcción y pruebas</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Control de errores, validación de salida, registro de decisiones y una batería de casos de prueba antes de que el sistema toque datos reales.</p>
-        </div>
-        <div>
-          <span class="cmyk-num" style="display: block; font-family: var(--font-heading); font-weight: 600; font-size: 44px;"><span class="paper">4</span><span class="plate plate-c" aria-hidden="true">4</span><span class="plate plate-m" aria-hidden="true">4</span><span class="plate plate-y" aria-hidden="true">4</span></span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 21px; line-height: 28px; margin: 20px 0 0;">Entrega documentada</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">El sistema queda en la cuenta del propio cliente, con su documentación y con formación al equipo que lo va a usar.</p>
-        </div>
-        <div>
-          <span class="cmyk-num" style="display: block; font-family: var(--font-heading); font-weight: 600; font-size: 44px;"><span class="paper">5</span><span class="plate plate-c" aria-hidden="true">5</span><span class="plate plate-m" aria-hidden="true">5</span><span class="plate plate-y" aria-hidden="true">5</span></span>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 21px; line-height: 28px; margin: 20px 0 0;">Mantenimiento opcional</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Monitorización, ajustes menores y ventana de soporte, contratables aparte según la criticidad del sistema.</p>
-        </div>
-      </div>
-    </section>
-
-    <section style="padding: 0 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Tecnología</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 24ch;">Herramientas elegidas por encaje, no por tendencia</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;">
-        <span class="tag tag-neutral">n8n</span>
-        <span class="tag tag-neutral">Claude</span>
-        <span class="tag tag-neutral">Supabase</span>
-        <span class="tag tag-neutral">PostgreSQL</span>
-        <span class="tag tag-neutral">Bases vectoriales (RAG)</span>
-        <span class="tag tag-neutral">HubSpot</span>
-        <span class="tag tag-neutral">Docker</span>
-        <span class="tag tag-neutral">Next.js</span>
-        <span class="tag tag-neutral">MCP</span>
-      </div>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 28px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Los flujos se construyen sobre infraestructura propia, auditable y trasladable. El agente no accede directamente a los sistemas del negocio: se interpone una capa controlada donde se definen los límites de lo que puede leer y escribir.</p>
-    </section>
-
-    <section style="padding: 0 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Formación y publicaciones</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">El criterio está escrito y se puede leer</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Material propio, usado en la formación a equipos y como base documental de los proyectos.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px clamp(28px, 4vw, 56px); margin-top: 40px;">
-        <div>
-          <i class="ph-duotone ph-book-open-text" style="font-size: 28px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 14px 0 0;">Manual profesional de IA</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Cómo aplicar la IA a un puesto de trabajo real, sin promesas de sustitución.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-graduation-cap" style="font-size: 28px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 14px 0 0;">Programa de formación en IA</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Itinerario para profesionales que quieren construir con estas herramientas, no solo usarlas.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-plugs-connected" style="font-size: 28px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 14px 0 0;">Guía de conexión de agentes</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Cómo se conecta un agente a los sistemas de una empresa y dónde se ponen los límites.</p>
-        </div>
-        <div>
-          <i class="ph-duotone ph-shield-check" style="font-size: 28px; color: var(--color-accent); display: block;"></i>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 14px 0 0;">Protección de datos y RGPD</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Qué obligaciones adquiere una pyme cuando automatiza con datos de sus clientes.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="cumplimiento" style="padding: 0 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Cumplimiento</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">Protección de datos, por escrito y desde el diseño</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Cuando un sistema trata datos de los clientes finales del negocio, el cumplimiento no es un anexo: condiciona la arquitectura. Estos son los cuatro compromisos de cada proyecto.</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px clamp(28px, 4vw, 56px); margin-top: 40px;">
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 0;">Contrato de encargado del tratamiento</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Conforme al artículo 28 del RGPD, firmado antes de que el sistema acceda a un solo dato personal.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 0;">Minimización de datos</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">El agente accede a los campos que necesita para su tarea, nunca a la base de datos completa.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 0;">Registro y conservación</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Cada decisión automática queda registrada, con un plazo de conservación definido y justificado.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 26px; margin: 0;">Supervisión humana</h3>
-          <p style="font-size: 15px; line-height: 26px; margin: 10px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Las decisiones con consecuencias para una persona se escalan, no se automatizan sin revisión.</p>
-        </div>
-      </div>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 36px;">
-        <a class="btn btn-primary" href="Checklist de implantacion segura.html" target="_blank" rel="noopener" style="text-decoration: none; min-height: 46px; padding-inline: 20px; font-size: 16px;"><i class="ph-duotone ph-download-simple" style="font-size: 19px;"></i>Descargar el checklist de implantación segura</a>
-      </div>
-      <p style="font-size: 15px; line-height: 26px; margin: 16px 0 0; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Doce comprobaciones antes de poner una automatización en producción. Descarga directa, sin registro.</p>
-    </section>
-
-    <section id="faq" style="padding: 0 0 72px;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Preguntas frecuentes</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 24ch;">Lo que se pregunta antes de empezar</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px clamp(28px, 4vw, 64px); margin-top: 48px;">
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Cuánto tarda en estar funcionando?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Según el nivel de solución. Una automatización sin IA puede entrar en producción en días; un agente con acciones requiere su batería de pruebas antes de operar sobre datos reales.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Cómo se mide el retorno?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Con indicadores del propio negocio: horas por proceso, errores manuales, tiempo de respuesta al cliente y coste por ejecución. La medición base se define en el diagnóstico, antes de construir.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Qué garantiza que el sistema no invente respuestas?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">La arquitectura: recuperación del documento real antes de responder, validación de la salida contra un formato esperado y escalado a una persona cuando la confianza es insuficiente.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Quién mantiene el sistema después?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">El sistema y su documentación quedan en la cuenta del cliente, de modo que pueda mantenerlo su equipo, otro proveedor o este despacho mediante la cuota opcional de mantenimiento.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Qué pasa con los datos confidenciales?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Se interpone una capa controlada entre el agente y los sistemas, con acceso limitado a los campos necesarios, contrato de encargado del tratamiento y política de conservación definida.</p>
-        </div>
-        <div>
-          <h3 style="font-family: var(--font-heading); font-weight: 600; font-size: 20px; line-height: 28px; margin: 0;">¿Se puede empezar por algo pequeño?</h3>
-          <p style="font-size: 16px; line-height: 28px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Es lo recomendable: un solo proceso con retorno medible, y ampliación posterior sobre una base que ya funciona.</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section id="contacto" style="background: var(--color-accent-100); padding: 72px 0;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin: 0 0 14px;">Contacto</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 26ch;">¿Hay un proceso que consume horas de su equipo?</h2>
-      <p style="font-size: 17px; line-height: 28px; max-width: 58ch; margin: 24px 0 0; color: color-mix(in srgb, var(--color-text) 80%, transparent);">El primer paso es una conversación breve, sin coste y sin compromiso, para valorar si existe un proceso concreto con retorno suficiente para automatizarlo.</p>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 36px;">
-        <a class="btn btn-primary" href="{{ waHref }}" target="_blank" rel="noopener" style="text-decoration: none; min-height: 48px; padding-inline: 22px; font-size: 17px;"><i class="ph-duotone ph-whatsapp-logo" style="font-size: 20px;"></i>Escribir por WhatsApp</a>
-        <a class="btn btn-secondary" href="{{ mailHref }}" style="text-decoration: none; min-height: 48px; padding-inline: 22px; font-size: 17px; color: var(--color-text); background: var(--color-bg);"><i class="ph-duotone ph-envelope-simple" style="font-size: 20px;"></i>Escribir un correo</a>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px 48px; margin-top: 48px; font-size: 16px; line-height: 28px;">
-        <p style="margin: 0;"><span style="display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);">WhatsApp Business</span>931 525 368</p>
-        <p style="margin: 0;"><span style="display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Correo</span>info@mpaitechnologies.es</p>
-        <p style="margin: 0;"><span style="display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Interlocución directa</span>marco@mpaitechnologies.es</p>
-        <p style="margin: 0;"><span style="display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);">Sede</span>Sant Fost de Campsentelles, Barcelona</p>
-      </div>
-    </div>
-  </section>
-
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
-    <section id="aviso-legal" style="padding: 72px 0;">
-      <span style="display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 0 0 14px;">Información legal</span>
-      <h2 style="font-family: var(--font-heading); font-weight: 600; font-size: 28px; line-height: 34px; margin: 0;">Aviso legal</h2>
-      <p style="font-size: 15px; line-height: 26px; max-width: 70ch; margin: 20px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Datos identificativos del titular de este sitio web, conforme al artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE). Titular: Marco Pavón Cobo. NIF 46717689C. Domicilio: C/ Mirador, 8 · 08105 Sant Fost de Campsentelles (Barcelona), España. Correo de contacto: info@mpaitechnologies.es. Actividad: consultoría de automatización y agentes de inteligencia artificial, prestada como profesional autónomo bajo el nombre comercial MPAI Technologies.</p>
-      <p style="font-size: 15px; line-height: 26px; max-width: 70ch; margin: 20px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent);">Este sitio no recoge datos personales: no tiene formularios, ni cookies, ni herramientas de analítica. El contacto se realiza por correo electrónico o WhatsApp. Si escribe, su mensaje y sus datos de contacto se tratan con la única finalidad de responder y valorar una posible colaboración, y se conservan mientras dure esa relación. Puede solicitar su acceso, rectificación o supresión en la misma dirección, y reclamar ante la Agencia Española de Protección de Datos. Los textos, el logotipo y el diseño de este sitio son de su titular. Los rangos de precios y los plazos son orientativos y no constituyen una oferta contractual: cada proyecto se cierra por escrito con su propio alcance y precio. Esta relación se rige por la legislación española.</p>
-    </section>
-
-    <footer style="padding: 32px 0 56px; border-top: 1px solid var(--color-divider); font-size: 13px; line-height: 26px; color: color-mix(in srgb, var(--color-text) 70%, transparent); display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center;">
-      <img src="assets/logo-mpai.png" alt="MPAI Technologies" style="height: 34px; width: auto; display: block; mix-blend-mode: multiply;">
-      <span>MPAI Technologies — Consultoría de automatización y agentes de IA para pymes españolas.</span>
-      <span style="margin-left: auto;"><a href="#aviso-legal">Aviso legal</a> · Marco Pavón Cobo · NIF 46717689C</span>
-    </footer>
-  </div>
-
-  </div>
+  <a class="btn btn-primario btn-bloque" href="#contacto" data-action="cerrar-menu">Reservar llamada</a>
 </div>
 
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;34931525368&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@mpaitechnologies.es&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;verPrecios&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;verMarcaDeAgua&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;tramaEnPantallazos&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.wm = React.createRef();
-    this.onScroll = this.onScroll.bind(this);
-    this.alPulsarTecla = this.alPulsarTecla.bind(this);
-    this.lbImg = React.createRef();
-  }
-  // El src del visor se asigna aquí y no en la plantilla: así el navegador no
-  // intenta descargar el hueco sin resolver mientras la página se dibuja.
-  componentDidUpdate() {
-    const el = this.lbImg.current;
-    if (!el) return;
-    const g = this.state.galeria ? this.galerias[this.state.galeria] : null;
-    const pase = g ? g.pases[this.state.pase] : null;
-    if (pase && el.getAttribute("src") !== pase.src) el.setAttribute("src", pase.src);
-  }
-  componentDidMount() {
-    window.addEventListener("keydown", this.alPulsarTecla);
-    // La marca de agua se desplaza con el scroll. Donde el navegador soporta
-    // animation-timeline lo hace el CSS; si no, se mueve desde aquí.
-    const soportaCss = typeof CSS !== "undefined" && CSS.supports && CSS.supports("animation-timeline", "scroll(root)");
-    if (soportaCss) return;
-    this.rafPendiente = false;
-    window.addEventListener("scroll", this.onScroll, { passive: true });
-    this.onScroll();
-  }
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScroll);
-    window.removeEventListener("keydown", this.alPulsarTecla);
-  }
-  onScroll() {
-    if (this.rafPendiente) return;
-    this.rafPendiente = true;
-    requestAnimationFrame(() => {
-      this.rafPendiente = false;
-      const el = this.wm.current;
-      if (!el) return;
-      const alcance = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      const avance = Math.min(1, Math.max(0, window.scrollY / alcance));
-      el.style.transform = "translate3d(0, " + (avance * 14 - 7).toFixed(2) + "vh, 0)";
-    });
-  }
-  // Cada proyecto y sus pantallas, en el orden en que se recorren.
-  galerias = {
-    crm: {
-      titulo: "CRM para consultoría energética",
-      pases: [
-        { src: "assets/proyectos/crm.png", pie: "Panel de la empresa: cartera, contratos activos y vencimientos próximos." },
-        { src: "assets/proyectos/01-crm-b.png", pie: "Licencias e integraciones con Datadis, OMIE, CNMC y SIPS, cada una con su estado." },
-        { src: "assets/proyectos/02-crm-b.png", pie: "Buzón de alertas: qué vence, qué se puede ahorrar y qué hay que atender esta semana." },
-        { src: "assets/proyectos/03-crm-b.png", pie: "Excesos de potencia y energía reactiva, con el origen de cada cifra etiquetado." }
-      ]
-    },
-    cantera: {
-      titulo: "Cantera — gestión de clubes de fútbol base",
-      pases: [
-        { src: "assets/proyectos/cantera.png", pie: "Panel del club: cobrado en el mes, morosidad y cuotas pendientes." },
-        { src: "assets/proyectos/01-cantera-b.png", pie: "Evolución de lo cobrado a lo largo de la temporada." },
-        { src: "assets/proyectos/02-cantera-b.png", pie: "Plantilla por categoría, con las plazas ocupadas y las libres." },
-        { src: "assets/proyectos/03-cantera-b.png", pie: "Últimas inscripciones y documentación con fecha de caducidad." }
-      ]
-    },
-    distail: {
-      titulo: "Distail — recepción y captación con IA",
-      pases: [
-        { src: "assets/proyectos/distail.png", pie: "Arquitectura general: qué resuelve un agente y qué resuelve un flujo." },
-        { src: "assets/proyectos/01-distail-b.png", pie: "Reparto de responsabilidades entre el agente conversacional y la automatización." },
-        { src: "assets/proyectos/02-distail-b.png", pie: "Recorrido de una llamada entrante hasta la cita creada en la agenda." },
-        { src: "assets/proyectos/03-distail-b.png", pie: "Captación saliente y seguimiento posterior en el CRM." }
-      ]
-    },
-    rustik: {
-      titulo: "Rustik Gastro Bar — carta y reservas",
-      pases: [
-        { src: "assets/proyectos/rustik.png", pie: "Portada del restaurante." },
-        { src: "assets/proyectos/01-rustik-b.png", pie: "Carta por secciones, editable desde el panel del negocio." },
-        { src: "assets/proyectos/02-rustik-b.png", pie: "Galería del local." },
-        { src: "assets/proyectos/03-rustik-b.png", pie: "Reserva de mesa con día, hora y número de comensales." }
-      ]
-    },
-    facturetool: {
-      titulo: "FactureTool — facturación para autónomos",
-      pases: [
-        { src: "assets/proyectos/facturetool.png", pie: "Nueva factura, con numeración correlativa y vencimiento automático." },
-        { src: "assets/proyectos/01-facturetool-b.png", pie: "Listado de facturas, con su estado de cobro." },
-        { src: "assets/proyectos/02-facturetool-b.png", pie: "Resumen por trimestres y exportación para la gestoría." },
-        { src: "assets/proyectos/03-facturetool-b.png", pie: "Configuración, copias de seguridad y registro de emisión." }
-      ]
-    },
-    barbershop: {
-      titulo: "Barber Shop — cita online en tres pasos",
-      pases: [
-        { src: "assets/proyectos/barbershop.png", pie: "Elección de servicios, con duración y precio a la vista." },
-        { src: "assets/proyectos/01-barbershop-b.png", pie: "Elección del día entre los disponibles." },
-        { src: "assets/proyectos/02-barbershop-b.png", pie: "Profesional y hora, según la agenda real del local." },
-        { src: "assets/proyectos/03-barbershop-b.png", pie: "Acceso de administración: agenda del día, servicios y empleados." }
-      ]
-    }
-  };
+<main id="contenido">
 
-  state = { galeria: null, pase: 0 };
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="contenedor hero-grid">
+      <div>
+        <p class="etiqueta">Automatización e IA para pymes · Barcelona</p>
+        <h1>Tu equipo pierde horas en tareas que <em>una máquina hace sola.</em></h1>
+        <p class="sub">Yo las encuentro y las automatizo: correos que nadie clasifica, citas por WhatsApp, facturas a mano. Sistemas que quedan en tu propia cuenta, no en la mía.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primario" href="#contacto">Reservar llamada — 20 min, gratis</a>
+          <a class="btn btn-secundario" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+        <p class="hero-nota">Sin compromiso. Si tu caso no da para automatizar, te lo digo en la propia llamada.</p>
+      </div>
+    </div>
+    <div class="contenedor">
+      <div class="tira">
+        <div class="tira-lista">
+          <div><strong>4 proyectos</strong>entregados a clientes reales, con pantallas que puedes ver</div>
+          <div><strong>Cada día</strong>mis propias redes se publican solas, sin que yo las toque</div>
+          <div><strong>100%</strong>de lo que construyo queda documentado en tu cuenta</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  abrirGaleria(clave, pase) {
-    this.setState({ galeria: clave, pase: pase || 0 });
-  }
-  cerrarGaleria() {
-    this.setState({ galeria: null, pase: 0 });
-  }
-  moverGaleria(paso) {
-    const g = this.galerias[this.state.galeria];
-    if (!g) return;
-    const n = g.pases.length;
-    this.setState((s) => ({ pase: (s.pase + paso + n) % n }));
-  }
-  alPulsarTecla(e) {
-    if (!this.state.galeria) return;
-    if (e.key === "Escape") { e.preventDefault(); this.cerrarGaleria(); }
-    if (e.key === "ArrowRight") { e.preventDefault(); this.moverGaleria(1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); this.moverGaleria(-1); }
-  }
+  <!-- DOLORES -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">¿Te suena?</p>
+        <h2>Estas son las tareas que más piden que les quite de encima</h2>
+      </div>
+      <div class="dolores-lista">
+        <div class="dolor"><span class="num">01</span><div><h3>Correos que nadie clasifica</h3><p>Llegan mezclados con todo lo demás y alguien tiene que leerlos uno a uno para saber qué es urgente.</p></div></div>
+        <div class="dolor"><span class="num">02</span><div><h3>Citas gestionadas por WhatsApp</h3><p>Cada cambio de hora es un mensaje más, y siempre hay uno que se pierde en la conversación.</p></div></div>
+        <div class="dolor"><span class="num">03</span><div><h3>Facturas tecleadas a mano</h3><p>Copiar importes y conceptos de un PDF a tu programa, factura a factura, cada semana.</p></div></div>
+        <div class="dolor"><span class="num">04</span><div><h3>Llamadas fuera de horario</h3><p>El cliente pregunta a las 23:40 y hasta el lunes no hay quien conteste.</p></div></div>
+        <div class="dolor"><span class="num">05</span><div><h3>Contenido para redes que nunca sale</h3><p>Sabes que hay que publicar, pero entre el día a día nunca llega el momento.</p></div></div>
+        <div class="dolor"><span class="num">06</span><div><h3>Un proceso que solo entiende una persona</h3><p>Si esa persona falta un día, el proceso se para con ella.</p></div></div>
+      </div>
+    </div>
+  </section>
 
-  renderVals() {
-    const tel = (this.props.whatsapp ?? "34931525368").replace(/[^0-9]/g, "");
-    const mail = this.props.email ?? "info@mpaitechnologies.es";
+  <!-- ESCALERA -->
+  <section class="seccion" id="como-funciona">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Qué hago</p>
+        <h2>Empiezo por lo barato y fiable. Subo de nivel solo si hace falta</h2>
+        <p>El primer trabajo es diagnosticar el proceso real, no vender un agente. Esto es lo que suelo encontrarme, de menos a más complejo.</p>
+      </div>
+      <div class="escalera">
+        <div class="peldano">
+          <span class="n">01 — Sin inteligencia artificial</span>
+          <h3>Automatización de procesos</h3>
+          <p>Conecto los programas que ya usas —correo, agenda, facturación, CRM— para que se pasen datos solos, con reglas fijas. Sin modelo de por medio: más barato, más rápido y sin margen de invención.</p>
+          <p class="ejemplo">Ejemplo: cuando entra una reserva en la web, se crea sola en la agenda y se manda la confirmación.</p>
+        </div>
+        <div class="peldano">
+          <span class="n">02 — Leer y ordenar</span>
+          <h3>Clasificación y extracción de datos</h3>
+          <p>Cuando la entrada es texto libre —un correo, una factura escaneada— un modelo lee, entiende y saca los datos que hacen falta.</p>
+          <p class="ejemplo">Ejemplo: la factura que llega por correo se lee sola y sus datos entran ya clasificados en tu programa de contabilidad.</p>
+        </div>
+        <div class="peldano">
+          <span class="n">03 — Responder con tus documentos</span>
+          <h3>Agente con documentos <span style="font-weight:400;color:var(--gris)">(la técnica se llama RAG)</span></h3>
+          <p>El sistema busca el fragmento exacto de tu documentación —catálogo, normativa interna, preguntas frecuentes— y responde citando de dónde lo ha sacado. No improvisa.</p>
+          <p class="ejemplo">Ejemplo: un cliente pregunta un plazo por WhatsApp y el sistema responde consultando tu propio manual, no de memoria.</p>
+        </div>
+        <div class="peldano">
+          <span class="n">04 — Actuar por ti</span>
+          <h3>Agente con acciones</h3>
+          <p>Además de responder, el sistema escribe en tu CRM, agenda una cita o clasifica un caso. Con un límite de intentos, una comprobación antes de dar la respuesta por buena, y una persona que entra si la confianza no es suficiente.</p>
+          <p class="ejemplo">Ejemplo: el que ves más abajo, en la demo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Un manejador por proyecto: las plantillas no aceptan argumentos en los huecos.
-    const abrir = {};
-    const teclaAbrir = {};
-    Object.keys(this.galerias).forEach((clave) => {
-      abrir[clave] = () => this.abrirGaleria(clave, 0);
-      teclaAbrir[clave] = (e) => {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); this.abrirGaleria(clave, 0); }
-      };
-    });
+  <!-- CIRCUITO -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Automatización en marcha</p>
+        <h2>Este circuito no es un dibujo: es el que protege mis propias redes</h2>
+        <p>Cada día, mis publicaciones de Instagram salen solas. Si el disparador principal se retrasa, este flujo se activa, lo rescata y solo entonces avisa por correo. Pulsa un nodo o dale a reproducir.</p>
+      </div>
+      <div class="circuito-caja">
+        <svg class="circuito-svg" id="circuito-svg" role="img" aria-label="Diagrama del flujo de respaldo de publicación en Instagram, con nueve pasos"></svg>
+        <p class="circuito-leyenda" id="circuito-leyenda" aria-live="polite">Pulsa «ver el recorrido» para seguir el flujo paso a paso.</p>
+        <div class="circuito-controles">
+          <button class="btn btn-secundario" data-action="ver-circuito">Ver el recorrido</button>
+          <a class="btn-fantasma" href="proyectos/redes-piloto-automatico/">Cómo está montado →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // Cada proyecto lleva su propio mensaje ya escrito en WhatsApp.
-    const mensajes = {
-      crm: "Hola Marco, vengo de mpaitechnologies.es. Me interesa un CRM a medida como el de consultoría energética. ¿Lo comentamos?",
-      cantera: "Hola Marco, vengo de mpaitechnologies.es. Me interesa una plataforma de gestión como Cantera. ¿Lo comentamos?",
-      distail: "Hola Marco, vengo de mpaitechnologies.es. Me interesa un sistema de recepción y captación con IA como el de Distail. ¿Lo comentamos?",
-      rustik: "Hola Marco, vengo de mpaitechnologies.es. Me interesa una web con carta y reservas como la de Rustik Gastro Bar. ¿Lo comentamos?",
-      facturetool: "Hola Marco, vengo de mpaitechnologies.es. Me interesa una herramienta de facturación como FactureTool. ¿Lo comentamos?",
-      barbershop: "Hola Marco, vengo de mpaitechnologies.es. Me interesa un sistema de cita online como el de Barber Shop. ¿Lo comentamos?"
-    };
-    const waProy = {};
-    Object.keys(mensajes).forEach((k) => {
-      waProy[k] = "https://wa.me/" + tel + "?text=" + encodeURIComponent(mensajes[k]);
-    });
+  <!-- AGENTE EN ACCIÓN -->
+  <section class="seccion bloque-crema">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Demostración con datos de ejemplo</p>
+        <h2 style="color:var(--crema-tinta)">Así responde un agente en una asesoría</h2>
+        <p>Elige una pregunta como la haría un cliente por WhatsApp. Mira cómo el agente consulta antes de responder, y qué pasa cuando el caso se le escapa de las manos.</p>
+      </div>
+      <div class="telefono">
+        <div class="telefono-pantalla">
+          <div class="telefono-cabecera"><span class="avatar">A</span> Asistente del despacho</div>
+          <div class="telefono-hilo" id="chat-hilo" aria-live="polite"></div>
+          <div class="chat-opciones" id="chat-opciones">
+            <button class="chat-opcion" data-chat="papeles">¿Qué papeles me faltan para hacer la renta?</button>
+            <button class="chat-opcion" data-chat="plazo">¿Cuándo vence el modelo 303 de este trimestre?</button>
+            <button class="chat-opcion" data-chat="dificil">Me han abierto una inspección, ¿qué hago?</button>
+          </div>
+        </div>
+      </div>
+      <p class="chat-aviso">Conversación de ejemplo. En tu caso, el agente consulta tu propio expediente y tu propia agenda.</p>
+    </div>
+  </section>
 
-    const g = this.state.galeria ? this.galerias[this.state.galeria] : null;
-    const actual = g ? g.pases[this.state.pase] : null;
+  <!-- CALCULADORA -->
+  <section class="seccion" id="calculadora">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Antes de hablar</p>
+        <h2>¿Cuánto tiempo se te va en tareas repetitivas?</h2>
+        <p>Pon tus propios números. Son solo para orientarte: la cifra real sale del diagnóstico, no de una calculadora.</p>
+      </div>
+      <div class="calc-caja">
+        <div>
+          <div class="calc-campo">
+            <label for="calc-personas">Personas que hacen esa tarea <b id="calc-personas-v">2</b></label>
+            <input type="range" id="calc-personas" min="1" max="15" value="2" step="1">
+          </div>
+          <div class="calc-campo">
+            <label for="calc-horas">Horas a la semana por persona <b id="calc-horas-v">5 h/semana</b></label>
+            <input type="range" id="calc-horas" min="1" max="20" value="5" step="1">
+          </div>
+          <div class="calc-campo">
+            <label for="calc-coste">Coste aproximado por hora <b id="calc-coste-v">20 €/h</b></label>
+            <input type="range" id="calc-coste" min="10" max="60" value="20" step="1">
+          </div>
+        </div>
+        <div class="calc-resultado">
+          <div class="cifra" id="calc-resultado">—</div>
+          <div class="cifra-sub" id="calc-resultado-sub">—</div>
+          <div class="escalon" id="calc-escalon"></div>
+        </div>
+      </div>
+      <p class="calc-aviso">Cálculo orientativo (horas × personas × 47 semanas laborables). No es una oferta ni un ahorro garantizado.</p>
+    </div>
+  </section>
 
-    return {
-      waHref: "https://wa.me/" + tel + "?text=" + encodeURIComponent("Hola Marco, vengo de mpaitechnologies.es. Quiero comentar un proceso de mi negocio que podría automatizarse."),
-      waProy: waProy,
-      mailHref: "mailto:" + mail + "?subject=" + encodeURIComponent("Diagnóstico de un proceso — desde mpaitechnologies.es") + "&body=" + encodeURIComponent("Hola Marco:\n\nTe escribo desde mpaitechnologies.es. El proceso que me gustaría revisar es:\n\n"),
-      verPrecios: this.props.verPrecios ?? true,
-      verMarcaDeAgua: this.props.verMarcaDeAgua ?? true,
-      wmRef: this.wm,
-      shotClass: (this.props.tramaEnPantallazos ?? false) ? "halftone" : "",
-      abrir: abrir,
-      teclaAbrir: teclaAbrir,
-      lbAbierto: !!g,
-      lbTitulo: g ? g.titulo : "",
-      lbImgRef: this.lbImg,
-      lbPie: actual ? actual.pie : "",
-      lbPosicion: g ? (this.state.pase + 1) + " de " + g.pases.length : "",
-      lbCerrar: () => this.cerrarGaleria(),
-      lbAnterior: () => this.moverGaleria(-1),
-      lbSiguiente: () => this.moverGaleria(1),
-      lbNoPropagar: (e) => e.stopPropagation(),
-      lbMiniaturas: g
-        ? g.pases.map((p, i) => ({
-            src: p.src,
-            activa: i === this.state.pase ? 1 : 0.42,
-            borde: i === this.state.pase ? "var(--color-accent)" : "transparent",
-            ir: () => this.setState({ pase: i })
-          }))
-        : []
-    };
-  }
-}
+  <!-- PROYECTOS DESTACADOS -->
+  <section class="seccion" id="proyectos">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Proyectos realizados</p>
+        <h2>Sistemas en uso, no maquetas</h2>
+        <p>Cada pieza se construyó para un proceso concreto de un negocio concreto. Lo que es demostración va rotulado como tal.</p>
+      </div>
+      <div class="proyectos-grid tres">
+        <a class="tarjeta-proyecto" href="proyectos/redes-piloto-automatico/">
+          <div class="miniatura"><img src="assets/redes/portada-caso.jpg" alt="Panel de publicaciones automáticas de MPAI Technologies" loading="lazy" width="600" height="375"></div>
+          <div class="cuerpo">
+            <div class="chips"><span class="chip cliente">Caso propio</span><span class="chip">Automatización</span></div>
+            <h3>Mis redes se publican solas</h3>
+            <p>Calendario, publicación automática y un flujo de respaldo que comprueba que de verdad se publicó antes de avisar.</p>
+            <span class="ver">Ver el sistema →</span>
+          </div>
+        </a>
+        <a class="tarjeta-proyecto" href="proyectos/crm-energia/">
+          <div class="miniatura"><img src="assets/proyectos/crm.png" alt="Panel del CRM para consultoría energética" loading="lazy" width="600" height="375"></div>
+          <div class="cuerpo">
+            <div class="chips"><span class="chip cliente">Cliente</span><span class="chip">CRM a medida</span></div>
+            <h3>CRM para consultoría energética</h3>
+            <p>Carteras, facturas auditadas y comisiones calculadas solas para varias empresas a la vez.</p>
+            <span class="ver">Ver el sistema →</span>
+          </div>
+        </a>
+        <a class="tarjeta-proyecto" href="proyectos/cantera/">
+          <div class="miniatura"><img src="assets/proyectos/cantera.png" alt="Panel de Cantera, gestión de clubes de fútbol base" loading="lazy" width="600" height="375"></div>
+          <div class="cuerpo">
+            <div class="chips"><span class="chip cliente">Cliente</span><span class="chip">Plataforma de gestión</span></div>
+            <h3>Cantera — clubes de fútbol base</h3>
+            <p>Cuotas, morosidad y documentación con caducidad, en un panel que usa gente sin perfil técnico.</p>
+            <span class="ver">Ver el sistema →</span>
+          </div>
+        </a>
+      </div>
+      <div class="centro" style="margin-top:var(--s-7)">
+        <a class="btn btn-secundario" href="proyectos/">Ver todos los proyectos</a>
+      </div>
+    </div>
+  </section>
 
-</script>
+  <!-- SECTORES -->
+  <section class="seccion" id="sectores">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Para quién</p>
+        <h2>Pymes y despachos sin departamento técnico</h2>
+        <p>Aplica a cualquier negocio con un proceso manual identificable. Estos son los sectores donde más lo he visto.</p>
+      </div>
+      <div class="sectores-grid">
+        <a class="tarjeta-sector" href="sectores/asesorias/"><h3>Asesorías y gestorías</h3><p>Correos, documentación y plazos que se acumulan cada trimestre.</p></a>
+        <a class="tarjeta-sector" href="sectores/clinicas/"><h3>Clínicas y centros</h3><p>Citas, recordatorios y llamadas que llegan fuera de horario.</p></a>
+        <a class="tarjeta-sector" href="sectores/restauracion/"><h3>Restauración</h3><p>Reservas, carta y reseñas gestionadas sin depender de una sola persona.</p></a>
+        <a class="tarjeta-sector" href="sectores/clubes/"><h3>Clubes y asociaciones</h3><p>Cuotas, inscripciones y comunicación con las familias.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="seccion bloque-crema" id="precios">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Inversión</p>
+        <h2 style="color:var(--crema-tinta)">Tres pasos, precio cerrado en cada uno</h2>
+        <p>Publico los rangos para que puedas valorar el encaje antes de la primera llamada. Nada se cobra sin que lo hayas visto por escrito antes.</p>
+      </div>
+      <div class="precios-pasos">
+        <div class="paso-precio">
+          <span class="n">PASO 1</span>
+          <h3>Diagnóstico</h3>
+          <div class="rango">200 – 400 €</div>
+          <p>Se descuenta del proyecto si seguimos adelante. El resultado es un documento con el proceso real, dónde se pierden horas y el ahorro estimado.</p>
+        </div>
+        <div class="paso-precio">
+          <span class="n">PASO 2</span>
+          <h3>Piloto</h3>
+          <div class="rango">2.500 – 3.500 €</div>
+          <p>Precio de piloto, por escrito. La tarifa normal de este mismo alcance es de 6.000 a 8.000 €: te lo digo también por escrito, para que la comparación sea honesta.</p>
+        </div>
+        <div class="paso-precio">
+          <span class="n">PASO 3</span>
+          <h3>Mantenimiento</h3>
+          <div class="rango">150 – 300 €/mes</div>
+          <p>Opcional. Monitorización, ajustes menores y una ventana de soporte, según lo crítico que sea el sistema para tu día a día.</p>
+        </div>
+      </div>
+      <details class="niveles-detalle">
+        <summary>Ver los seis niveles de solución, uno por uno →</summary>
+        <table class="tabla-niveles">
+          <thead><tr><th>Nivel</th><th>Qué es</th><th>Cuándo aplica</th><th>Rango</th></tr></thead>
+          <tbody>
+            <tr><td data-col="Nivel">0</td><td data-col="Qué es">Diagnóstico del proceso</td><td data-col="Cuándo">Siempre el primer paso</td><td class="rango-cel" data-col="Rango">200 – 400 €</td></tr>
+            <tr><td data-col="Nivel">1</td><td data-col="Qué es">Automatización sin IA</td><td data-col="Cuándo">Proceso con reglas fijas</td><td class="rango-cel" data-col="Rango">400 – 900 €</td></tr>
+            <tr><td data-col="Nivel">2</td><td data-col="Qué es">Clasificación o extracción con un modelo</td><td data-col="Cuándo">Correos, facturas</td><td class="rango-cel" data-col="Rango">700 – 1.800 €</td></tr>
+            <tr><td data-col="Nivel">3</td><td data-col="Qué es">Agente con documentos</td><td data-col="Cuándo">Responder sobre tu documentación</td><td class="rango-cel" data-col="Rango">1.500 – 3.500 €</td></tr>
+            <tr><td data-col="Nivel">4</td><td data-col="Qué es">Agente con acciones</td><td data-col="Cuándo">Escribe en tu CRM o tu agenda</td><td class="rango-cel" data-col="Rango">2.500 – 6.000 €</td></tr>
+            <tr><td data-col="Nivel">5</td><td data-col="Qué es">Orquestador con subagentes</td><td data-col="Cuándo">Sistema con varias ramas</td><td class="rango-cel" data-col="Rango">Desde 5.000 €</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </div>
+  </section>
+
+  <!-- MÉTODO -->
+  <section class="seccion" id="metodo">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Cómo trabajo</p>
+        <h2>De la primera llamada al mantenimiento</h2>
+      </div>
+      <div class="metodo-lista">
+        <div class="metodo-item"><div class="circ">1</div><div><h3>Llamada inicial, gratis</h3><p>20 minutos para entender el proceso real, sin compromiso.</p></div></div>
+        <div class="metodo-item"><div class="circ">2</div><div><h3>Diagnóstico por escrito</h3><p>El proceso, dónde se pierden horas y el retorno estimado. De pago, descontable si seguimos.</p></div></div>
+        <div class="metodo-item"><div class="circ">3</div><div><h3>Propuesta con alcance cerrado</h3><p>Qué se automatiza, qué nivel aplica y qué queda fuera, por escrito antes de empezar.</p></div></div>
+        <div class="metodo-item"><div class="circ">4</div><div><h3>Construcción y pruebas</h3><p>Con una batería de casos de prueba antes de que el sistema toque un solo dato real.</p></div></div>
+        <div class="metodo-item"><div class="circ">5</div><div><h3>Entrega documentada</h3><p>Todo queda en tu cuenta, con formación a quien lo vaya a usar.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIÉN -->
+  <section class="seccion bloque-crema">
+    <div class="contenedor">
+      <div class="quien">
+        <div class="quien-foto"><img src="assets/marco.jpeg" alt="Marco Pavón Cobo" loading="lazy" width="280" height="217"></div>
+        <div class="quien-texto">
+          <p class="etiqueta">Quién está detrás</p>
+          <h2 style="color:var(--crema-tinta);margin-top:var(--s-2)">Marco Pavón Cobo</h2>
+          <p>Trabajo solo, con apoyo externo puntual. Vengo de años en integración de sistemas y telecomunicaciones antes de dedicarme a la automatización con IA: sé lo que es que algo falle un sábado y no haya nadie para arreglarlo, así que construyo para que eso no pase.</p>
+          <p>La tecnología está al alcance de cualquiera. Lo que decide el resultado es el criterio: qué se automatiza primero, qué no se toca, y qué hace el sistema cuando no está seguro.</p>
+          <p class="quien-promesa">Si no te hace falta un agente de IA, te lo digo en la propia llamada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUMPLIMIENTO -->
+  <section class="seccion" id="cumplimiento">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Tus datos, seguros</p>
+        <h2>Cuatro compromisos en cada proyecto</h2>
+        <p>Cuando el sistema trata datos de tus propios clientes, esto no es un anexo: condiciona cómo se construye desde el primer día.</p>
+      </div>
+      <div class="cumple-grid">
+        <div class="cumple-item"><h3>Contrato de encargado del tratamiento</h3><p>Conforme al artículo 28 del RGPD, firmado antes de que el sistema acceda a un solo dato personal.</p></div>
+        <div class="cumple-item"><h3>Solo los datos que hacen falta</h3><p>El sistema accede a los campos que necesita para su tarea, nunca a la base de datos completa.</p></div>
+        <div class="cumple-item"><h3>Registro y conservación</h3><p>Cada decisión automática queda registrada, con un plazo de conservación definido.</p></div>
+        <div class="cumple-item"><h3>Una persona revisa lo importante</h3><p>Las decisiones con consecuencias para alguien se escalan, no se automatizan sin revisión.</p></div>
+      </div>
+      <div class="centro" style="margin-top:var(--s-6)">
+        <a class="btn btn-secundario" href="Checklist de implantacion segura.html">Descargar el checklist de implantación segura</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="seccion" id="faq">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Preguntas frecuentes</p>
+        <h2>Lo que se pregunta antes de empezar</h2>
+      </div>
+      <div>
+        <details class="faq-item"><summary class="faq-pregunta">¿Cuánto tarda en estar funcionando?<span class="mas">+</span></summary><div class="faq-respuesta">Depende del nivel. Una automatización sin IA puede estar en marcha en días; un agente con acciones necesita su batería de pruebas antes de tocar datos reales.</div></details>
+        <details class="faq-item"><summary class="faq-pregunta">¿Cómo sé si de verdad ahorro dinero?<span class="mas">+</span></summary><div class="faq-respuesta">Con indicadores de tu propio negocio: horas por proceso, errores manuales, tiempo de respuesta al cliente. Se mide antes de construir, en el diagnóstico.</div></details>
+        <details class="faq-item"><summary class="faq-pregunta">¿Qué garantiza que el sistema no se invente respuestas?<span class="mas">+</span></summary><div class="faq-respuesta">La forma en que está construido: busca el documento real antes de responder, comprueba que la respuesta tiene el formato esperado, y pasa el caso a una persona cuando no está seguro.</div></details>
+        <details class="faq-item"><summary class="faq-pregunta">¿Quién mantiene el sistema después?<span class="mas">+</span></summary><div class="faq-respuesta">Queda documentado en tu cuenta, así que puede mantenerlo tu equipo, otro proveedor, o yo mismo con la cuota de mantenimiento opcional.</div></details>
+        <details class="faq-item"><summary class="faq-pregunta">¿Qué pasa con mis datos confidenciales?<span class="mas">+</span></summary><div class="faq-respuesta">El sistema nunca toca tus programas directamente: hay una capa intermedia controlada donde se fijan los límites de lo que puede leer y escribir.</div></details>
+        <details class="faq-item"><summary class="faq-pregunta">¿Puedo empezar por algo pequeño?<span class="mas">+</span></summary><div class="faq-respuesta">Es justo lo que recomiendo: un solo proceso con retorno medible, y ampliar después sobre una base que ya funciona.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="seccion" id="contacto">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <p class="etiqueta">Contacto</p>
+        <h2>¿Hay un proceso que le quita horas a tu equipo?</h2>
+        <p>El primer paso es una llamada breve, sin coste ni compromiso, para ver si hay un proceso con retorno suficiente para automatizarlo.</p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primario" href="https://calendar.app.google/" target="_blank" rel="noopener">Reservar llamada — 20 min, gratis</a>
+        <a class="btn btn-secundario" href="https://wa.me/34931525368" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a class="btn-fantasma" href="mailto:info@mpaitechnologies.es">o escribe un correo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="contenedor">
+    <div class="footer-grid">
+      <div>
+        <h4>MPAI Technologies</h4>
+        <p>Consultoría de automatización y agentes de IA para pymes españolas. Marco Pavón Cobo, profesional autónomo.</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="https://wa.me/34931525368">WhatsApp — 931 525 368</a>
+        <a href="mailto:info@mpaitechnologies.es">info@mpaitechnologies.es</a>
+        <a href="mailto:marco@mpaitechnologies.es">marco@mpaitechnologies.es</a>
+        <p>Sant Fost de Campsentelles, Barcelona</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <a href="proyectos/">Proyectos</a>
+        <a href="#sectores">Sectores</a>
+        <a href="#precios">Precios</a>
+        <a href="Checklist de implantacion segura.html">Checklist de implantación</a>
+        <a href="aviso-legal/">Aviso legal</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© 2026 MPAI Technologies — Marco Pavón Cobo · NIF 46717689C</span>
+      <a href="aviso-legal/" style="color:var(--gris)">Aviso legal</a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/34931525368" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.85 9.85 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.03c-.25.7-1.24 1.28-2.02 1.45-.55.11-1.26.2-3.66-.79-3.07-1.27-5.05-4.4-5.2-4.6-.15-.2-1.24-1.65-1.24-3.15s.78-2.23 1.06-2.53c.26-.28.58-.35.77-.35h.55c.18 0 .42-.03.65.5.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.31.31-.13.6.18.3.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.48 1.53.3.15.47.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.75.82 2.05.97.3.15.5.23.57.35.08.13.08.73-.17 1.43z"/></svg>
+</a>
+
+<div class="visor" role="dialog" aria-modal="true" aria-label="Pantallas del proyecto">
+  <div class="visor-cabecera">
+    <div><span class="etiqueta suave">Proyecto</span><h3 class="visor-titulo" style="margin-top:6px"></h3></div>
+    <div style="display:flex;align-items:center;gap:var(--s-4)"><span class="visor-posicion etiqueta suave"></span><button class="btn btn-secundario" data-action="cerrar-visor" aria-label="Cerrar">✕</button></div>
+  </div>
+  <div class="visor-cuerpo">
+    <button class="visor-flecha" data-action="visor-prev" aria-label="Anterior">←</button>
+    <img src="" alt="">
+    <button class="visor-flecha" data-action="visor-next" aria-label="Siguiente">→</button>
+  </div>
+  <p class="visor-pie"></p>
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
