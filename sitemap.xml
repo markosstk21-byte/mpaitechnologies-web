@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mpaitechnologies.es/</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://mpaitechnologies.es/</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/redes-piloto-automatico/</loc><lastmod>2026-09-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/crm-energia/</loc><lastmod>2026-09-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/cantera/</loc><lastmod>2026-09-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/distail/</loc><lastmod>2026-09-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/rustik/</loc><lastmod>2026-09-23</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/facturetool/</loc><lastmod>2026-09-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mpaitechnologies.es/proyectos/barbershop/</loc><lastmod>2026-09-23</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mpaitechnologies.es/sectores/asesorias/</loc><lastmod>2026-09-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://mpaitechnologies.es/sectores/clinicas/</loc><lastmod>2026-09-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://mpaitechnologies.es/sectores/restauracion/</loc><lastmod>2026-09-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://mpaitechnologies.es/sectores/clubes/</loc><lastmod>2026-09-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://mpaitechnologies.es/aviso-legal/</loc><lastmod>2026-09-23</lastmod><priority>0.3</priority></url>
 </urlset>
