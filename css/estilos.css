@@ -407,3 +407,47 @@ footer { border-top: 1px solid var(--linea); padding: var(--s-8) 0 var(--s-6); }
 .solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 .centro { text-align: center; }
 .mt-0 { margin-top: 0 !important; }
+
+/* ---- Tabla de precios (nueva sección) ---- */
+.tabla-precios-wrapper { overflow-x: auto; margin-top: var(--s-5); }
+.tabla-precios { width: 100%; border-collapse: collapse; }
+.tabla-precios th { 
+  background: transparent; 
+  text-align: left; 
+  font-family: var(--f-mono); 
+  font-size: 11px; 
+  color: var(--gris); 
+  text-transform: uppercase; 
+  letter-spacing: .08em; 
+  padding: var(--s-3); 
+  border-bottom: 1px solid var(--linea);
+}
+.tabla-precios td { 
+  padding: var(--s-4); 
+  border-bottom: 1px solid var(--linea); 
+  vertical-align: middle;
+  font-size: 15px;
+}
+.tabla-precios td:first-child { 
+  font-family: var(--f-display); 
+  font-weight: 800;
+  color: var(--acento);
+  width: 60px;
+}
+.tabla-precios td:last-child { 
+  font-family: var(--f-mono); 
+  font-size: 14px;
+  color: var(--blanco);
+  font-weight: 500;
+  text-align: right;
+}
+.tabla-precios tbody tr:hover { 
+  background: rgba(255, 74, 28, 0.04);
+}
+@media (max-width: 699px) {
+  .tabla-precios thead { display: none; }
+  .tabla-precios tr { display: block; border-bottom: 1px solid var(--linea); padding: var(--s-4) 0; margin-bottom: var(--s-3); }
+  .tabla-precios td { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); border: 0; padding: var(--s-2) 0; }
+  .tabla-precios td:first-child { font-size: 18px; margin-bottom: var(--s-2); }
+  .tabla-precios th { display: none; }
+}
