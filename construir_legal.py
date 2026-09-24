@@ -46,8 +46,8 @@ def h2(texto):
 # ---------------------------------------------------------------- Aviso legal
 aviso = envolver("Información legal", "Aviso legal", [
     f"<p>Datos identificativos del titular de este sitio web, conforme al artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE).</p>",
-    f"<p>{b('Titular:')} {TITULAR}<br>\n        {b('NIF:')} {NIF}<br>\n        {b('Nombre comercial:')} MPAI Technologies<br>\n        {b('Domicilio:')} {DOMICILIO}<br>\n        {b('Correo electrónico:')} <a href=\"mailto:{CORREO}\">{CORREO}</a><br>\n        {b('Teléfono y WhatsApp:')} {TELEFONO}<br>\n        {b('Actividad:')} consultoría de automatización y agentes de inteligencia artificial, prestada como profesional autónomo bajo el nombre comercial MPAI Technologies.</p>",
-    "<p>El titular ejerce como persona física, por lo que no figura inscrito en el Registro Mercantil. La actividad no requiere autorización administrativa previa ni pertenencia a un colegio profesional, y el titular no está adherido a ningún código de conducta.</p>",
+    f"<p>{b('Titular:')} {TITULAR}<br>\n        {b('NIF:')} {NIF}<br>\n        {b('Nombre comercial:')} MPAI Technologies<br>\n        {b('Domicilio:')} {DOMICILIO}<br>\n        {b('Correo electrónico:')} <a href=\"mailto:{CORREO}\">{CORREO}</a><br>\n        {b('Teléfono y WhatsApp:')} {TELEFONO}<br>\n        {b('Actividad:')} consultoría de automatización y agentes de inteligencia artificial, prestada por el titular, persona física, bajo el nombre comercial MPAI Technologies.</p>",
+    "<p>El titular es una persona física, por lo que no figura inscrito en el Registro Mercantil. La actividad no requiere autorización administrativa previa ni pertenencia a un colegio profesional, y el titular no está adherido a ningún código de conducta.</p>",
     h2("Precios"),
     "<p>Los precios que aparecen en esta web son rangos orientativos, <strong>sin IVA incluido</strong>, y no constituyen una oferta contractual. Cada proyecto se cierra por escrito con su alcance, su precio definitivo y los impuestos aplicables antes de empezar.</p>",
     h2("Demostraciones"),
