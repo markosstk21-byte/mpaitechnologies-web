@@ -62,11 +62,13 @@ def pie(rel):
         <a href="{rel}#precios">Precios</a>
         <a href="{rel}Checklist de implantacion segura.html">Checklist de implantación</a>
         <a href="{rel}aviso-legal/">Aviso legal</a>
+        <a href="{rel}privacidad/">Privacidad</a>
+        <a href="{rel}cookies/">Cookies</a>
       </div>
     </div>
     <div class="footer-legal">
       <span>© 2026 MPAI Technologies — Marco Pavón Cobo · NIF 46717689C</span>
-      <a href="{rel}aviso-legal/" style="color:var(--gris)">Aviso legal</a>
+      <span><a href="{rel}aviso-legal/" style="color:var(--gris)">Aviso legal</a> · <a href="{rel}privacidad/" style="color:var(--gris)">Privacidad</a> · <a href="{rel}cookies/" style="color:var(--gris)">Cookies</a></span>
     </div>
   </div>
 </footer>
@@ -91,16 +93,7 @@ def visor(rel):
 </div>
 '''
 
-ANALITICA_PENDIENTE = '''<!-- Analítica sin cookies (GoatCounter) — PENDIENTE DE ACTIVAR.
-     1. Crea tu cuenta gratuita en https://www.goatcounter.com/ (sin cookies, sin banner de consentimiento).
-     2. Cambia TU-CODIGO por el código que te den.
-     3. Quita las marcas <!- - y - -> de las dos líneas siguientes en TODAS las páginas.
-<script data-goatcounter="https://TU-CODIGO.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
--->
-'''
-
 def pagina(rel, titulo, descripcion, url_canon, cuerpo, activo="", extra_head=""):
-    extra_head = extra_head + ANALITICA_PENDIENTE
     return f'''<!DOCTYPE html>
 <html lang="es">
 <head>
