@@ -117,6 +117,8 @@ li p{margin:3px 0 0;color:var(--muted);font-size:14.5px;max-width:58ch}
 .mesa .act.web span{color:var(--ink);opacity:.8}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chip{transition:none}}
 
+.ban[data-ph]{cursor:zoom-in}.ban[data-ph]:focus-visible{outline:3px solid var(--cheese);outline-offset:3px}
+
 /* ---------- hoy: menú del día y sugerencias ---------- */
 .hoy{display:flex;flex-direction:column;gap:12px}
 .mdia{position:relative;border-radius:16px;padding:18px 16px 16px;background:linear-gradient(140deg,var(--hot),#ff2e63);color:#fff;overflow:hidden}
@@ -865,7 +867,7 @@ li.hasph{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-it
       if (!body) return;
       var cl = tx(c, 'label'), cs = tx(c, 'sub');
       chips += '<a class="chip" href="#' + esc(c.id) + '" data-id="' + esc(c.id) + '">' + esc(cl) + '</a>';
-      var head = c.img ? '<figure class="ban"><img src="' + IM[c.img] + '" alt="" style="object-position:' + esc(c.pos || '50% 50%') + '"><figcaption><span class="kick">' + esc(cs) + '</span><h2>' + esc(cl) + '</h2></figcaption></figure>'
+      var head = c.img ? '<figure class="ban" role="button" tabindex="0" data-ph="img:' + esc(c.img) + '" data-n="' + esc(cl) + '" aria-label="' + esc(t2('foto')) + ': ' + esc(cl) + '"><img src="' + IM[c.img] + '" alt="" style="object-position:' + esc(c.pos || '50% 50%') + '"><figcaption><span class="kick">' + esc(cs) + '</span><h2>' + esc(cl) + '</h2></figcaption></figure>'
         : '<header class="plain"><span class="kick">' + esc(cs) + '</span><h2>' + esc(cl) + '</h2></header>';
       secs += '<section class="cat" id="' + esc(c.id) + '">' + head + body + '</section>';
     });
@@ -884,7 +886,7 @@ li.hasph{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-it
     wireChips();
   }
   document.getElementById('app').addEventListener('click', function (e) {
-    var th = e.target.closest('.thumb');
+    var th = e.target.closest('.thumb,.ban[data-ph]');
     if (th) { var lb = document.getElementById('lb'); lb.querySelector('img').src = photoSrc(th.dataset.ph); lb.querySelector('p').textContent = th.dataset.n; lb.hidden = false; lb.querySelector('.lbx').focus(); return; }
     if (e.target.closest('.lbx') || e.target.id === 'lb') { document.getElementById('lb').hidden = true; return; }
     var b = e.target.closest('.lg'); if (!b) return;
@@ -892,6 +894,10 @@ li.hasph{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-it
     LANG = l; try { localStorage.setItem('tb-lang', l); } catch (er) {}
     var y = window.scrollY; renderClient(); window.scrollTo(0, y);
     var nb = document.querySelector('.lg[data-lang="' + l + '"]'); if (nb) nb.focus();
+  });
+  document.getElementById('app').addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.ban[data-ph]')) { e.preventDefault(); e.target.click(); }
+    if (e.key === 'Escape') { var lb = document.getElementById('lb'); if (lb && !lb.hidden) lb.hidden = true; }
   });
   function wireChips() {
     var chips = [].slice.call(document.querySelectorAll('.chip'));
